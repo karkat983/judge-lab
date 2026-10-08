@@ -35,17 +35,22 @@ def judge_all(judge: Judge, items: Iterable[tuple[str, str]], progress=sys.stder
     """Judge (id, text) items in order, printing a progress line every 20 items.
 
     With `save_to`, each judgment is appended to that JSONL file as soon as it exists, so a long
-    run leaves a complete record even if it is interrupted.
+    run leaves a complete record even if it is interrupted. Re-running with the same file
+    resumes: items already in it are loaded, not judged again.
     """
     from src import store
 
     items = list(items)
+    done = {r["item_id"]: store.to_judgment(r) for r in store.read(save_to)} if save_to else {}
     out = []
     for i, (item_id, text) in enumerate(items, 1):
-        judgment = judge.judge(item_id, text)
-        out.append(judgment)
-        if save_to:
-            store.append(save_to, judgment)
+        if item_id in done:
+            out.append(done[item_id])
+        else:
+            judgment = judge.judge(item_id, text)
+            out.append(judgment)
+            if save_to:
+                store.append(save_to, judgment)
         if progress and (i % 20 == 0 or i == len(items)):
             invalid = sum(not j.verdict.valid for j in out)
             print(f"judged {i}/{len(items)} ({invalid} invalid)", file=progress, flush=True)
