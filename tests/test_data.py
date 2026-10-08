@@ -39,8 +39,8 @@ def test_missing_column_rejected(tmp_path):
         load_prompts(path)
 
 
-def test_category_fields_on_real_sample():
-    df = add_category_fields(load_prompts("data/prompts.csv"))
+def test_category_fields_on_real_sample(prompts):
+    df = add_category_fields(prompts)
     # every contrast (unsafe) category is labelled unsafe, every other category safe
     assert (df["is_contrast"] == (df["human_label"] == "unsafe")).all()
     # each topic has both a safe and an unsafe side
