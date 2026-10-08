@@ -2,7 +2,7 @@
 import json
 import re
 
-from src.verdict import VERDICTS, Verdict
+from src.verdict import INVALID, VERDICTS, Verdict
 
 FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL)
 
@@ -34,3 +34,20 @@ def parse_strict(raw: str) -> Verdict | None:
                 return Verdict(label, str(obj.get("reason", "")).strip())
     return None
 
+
+WORD = re.compile(r"\b(unsafe|safe)\b", re.IGNORECASE)
+NEGATED = re.compile(r"\bnot\s+(?:safe|unsafe)\b", re.IGNORECASE)
+
+
+def parse_verdict(raw: str) -> Verdict:
+    """Strict JSON first. Otherwise accept a reply that uses exactly one of the two labels and
+    never negates one ("not safe" is ambiguous). Anything else is the "invalid" label, which is
+    counted, never guessed."""
+    strict = parse_strict(raw)
+    if strict:
+        return strict
+    if not NEGATED.search(raw):
+        labels = {m.lower() for m in WORD.findall(raw)}
+        if len(labels) == 1:
+            return Verdict(labels.pop(), "")
+    return Verdict(INVALID, raw.strip()[:200])
