@@ -7,6 +7,8 @@ judge:
   provider: ollama
   model: qwen2.5:3b-instruct
   max_tokens: 200
+  temperature: 0                  # greedy decoding; the bias experiments vary this on purpose
+  seed: 7
   ollama_host: http://localhost:11434
   anthropic_model: claude-opus-5-5
   anthropic_effort: medium
