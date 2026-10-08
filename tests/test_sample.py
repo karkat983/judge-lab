@@ -64,3 +64,17 @@ def test_committed_sample_is_reproducible_from_the_raw_file():
     with open(resolve(cfg["prompts_path"]), newline="") as f:
         committed = list(csv.DictReader(f))
     assert [r["id"] for r in sample] == [r["id"] for r in committed]
+
+
+def test_committed_sample_is_stratified_by_category(prompts):
+    counts = prompts["category"].value_counts()
+    assert len(counts) == 18
+    assert counts.min() >= 11 and counts.max() <= 12          # 200 / 18 = 11.1 per category
+    assert counts.sum() == 200
+
+
+def test_allocation_never_exceeds_a_group():
+    from src.sample import allocate
+
+    counts = allocate({"big": 100, "tiny": 1}, 50)
+    assert counts["tiny"] <= 1 and sum(counts.values()) == 50
