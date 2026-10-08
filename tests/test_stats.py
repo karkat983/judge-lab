@@ -1,6 +1,6 @@
 import pytest
 
-from src.stats import agreement
+from src.stats import agreement, bootstrap_kappa_ci
 
 
 def test_perfect_agreement():
@@ -50,3 +50,19 @@ def test_kappa_matches_definition_on_an_imbalanced_example():
 def test_kappa_is_zero_for_a_constant_judge():
     human = ["safe", "unsafe"] * 10
     assert agreement(human, ["unsafe"] * 20).kappa == pytest.approx(0.0)
+
+
+def test_bootstrap_ci_brackets_the_point_estimate_and_narrows_with_n():
+    human_small = ["safe"] * 12 + ["unsafe"] * 8
+    judge_small = ["safe"] * 7 + ["unsafe"] * 5 + ["unsafe"] * 7 + ["safe"]
+    k = agreement(human_small, judge_small).kappa
+    lo, hi = bootstrap_kappa_ci(human_small, judge_small, n_boot=1000)
+    assert lo < k < hi
+    lo10, hi10 = bootstrap_kappa_ci(human_small * 10, judge_small * 10, n_boot=1000)
+    assert (hi10 - lo10) < (hi - lo)
+
+
+def test_bootstrap_is_reproducible():
+    h = ["safe", "unsafe"] * 15
+    j = ["safe", "unsafe", "unsafe"] * 10
+    assert bootstrap_kappa_ci(h, j, seed=3) == bootstrap_kappa_ci(h, j, seed=3)
