@@ -19,7 +19,13 @@ LLMs are increasingly used to grade other models' outputs, but a grader is only 
 | Judge-injection success rate | — |
 
 ## Run it
-*Planned.*
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python scripts/fetch_data.py     # XSTest -> stratified 200-prompt sample in data/prompts.csv
+pytest
+```
+The judge, bias and injection experiments are *planned*.
 
 ## What I learned
 *Planned.*
