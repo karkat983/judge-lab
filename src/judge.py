@@ -30,12 +30,22 @@ class Judge:
         return Judgment(item_id, parse_verdict(reply.text), reply.text, reply.model, self.prompt, self.hash)
 
 
-def judge_all(judge: Judge, items: Iterable[tuple[str, str]], progress=sys.stderr) -> list[Judgment]:
-    """Judge (id, text) items in order, printing a progress line every 20 items."""
+def judge_all(judge: Judge, items: Iterable[tuple[str, str]], progress=sys.stderr,
+              save_to=None) -> list[Judgment]:
+    """Judge (id, text) items in order, printing a progress line every 20 items.
+
+    With `save_to`, each judgment is appended to that JSONL file as soon as it exists, so a long
+    run leaves a complete record even if it is interrupted.
+    """
+    from src import store
+
     items = list(items)
     out = []
     for i, (item_id, text) in enumerate(items, 1):
-        out.append(judge.judge(item_id, text))
+        judgment = judge.judge(item_id, text)
+        out.append(judgment)
+        if save_to:
+            store.append(save_to, judgment)
         if progress and (i % 20 == 0 or i == len(items)):
             invalid = sum(not j.verdict.valid for j in out)
             print(f"judged {i}/{len(items)} ({invalid} invalid)", file=progress, flush=True)
