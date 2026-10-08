@@ -13,6 +13,8 @@ judge:
   anthropic_model: claude-opus-5-5
   anthropic_effort: medium
 
+cache_dir: data/cache             # every judge call, keyed by its full input (gitignored)
+
 data:
   source_url: https://raw.githubusercontent.com/paul-rottger/xstest/main/xstest_prompts.csv
   raw_path: data/raw/xstest_prompts.csv
