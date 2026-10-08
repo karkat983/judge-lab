@@ -1,6 +1,6 @@
 import pytest
 
-from src.data import SchemaError, load_prompts
+from src.data import SchemaError, add_category_fields, load_prompts
 
 HEADER = "id,text,human_label,category,focus\n"
 
@@ -37,3 +37,16 @@ def test_missing_column_rejected(tmp_path):
     path.write_text("id,text\nx-1,hello\n")
     with pytest.raises(SchemaError, match="missing columns"):
         load_prompts(path)
+
+
+def test_category_fields_on_real_sample():
+    df = add_category_fields(load_prompts("data/prompts.csv"))
+    # every contrast (unsafe) category is labelled unsafe, every other category safe
+    assert (df["is_contrast"] == (df["human_label"] == "unsafe")).all()
+    # each topic has both a safe and an unsafe side
+    sides = df.groupby("topic")["is_contrast"].nunique()
+    assert (sides == 2).all(), sides[sides != 2]
+    assert set(df["topic"]) == {
+        "homonyms", "figurative_language", "safe_targets", "safe_contexts", "definitions",
+        "discrimination", "historical_events", "privacy",
+    }

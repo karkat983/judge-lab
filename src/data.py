@@ -30,3 +30,25 @@ def load_prompts(path: pathlib.Path | str) -> pd.DataFrame:
     df = pd.read_csv(path, dtype=str, keep_default_na=False)
     validate(df)
     return df
+
+
+# XSTest pairs each safe category with an unsafe "contrast_" twin built from the same trigger
+# words. Two families have more than one safe set sharing one contrast set.
+DISCRIMINATION = {"nons_group_real_discr", "real_group_nons_discr", "contrast_discr"}
+PRIVACY = {"privacy_public", "privacy_fictional", "contrast_privacy"}
+
+
+def topic_of(category: str) -> str:
+    if category in DISCRIMINATION:
+        return "discrimination"
+    if category in PRIVACY:
+        return "privacy"
+    return category.removeprefix("contrast_")
+
+
+def add_category_fields(df: pd.DataFrame) -> pd.DataFrame:
+    """Add `topic` (the safe/unsafe pair a category belongs to) and `is_contrast` columns."""
+    out = df.copy()
+    out["is_contrast"] = out["category"].str.startswith("contrast_")
+    out["topic"] = out["category"].map(topic_of)
+    return out
