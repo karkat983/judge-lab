@@ -66,3 +66,22 @@ def test_bootstrap_is_reproducible():
     h = ["safe", "unsafe"] * 15
     j = ["safe", "unsafe", "unsafe"] * 10
     assert bootstrap_kappa_ci(h, j, seed=3) == bootstrap_kappa_ci(h, j, seed=3)
+
+
+def test_unsafe_class_metrics_on_the_imbalanced_example():
+    # confusion [[7, 5], [1, 7]]: 12 judged unsafe of which 7 truly unsafe; 8 unsafe of which 7 caught
+    human = ["safe"] * 12 + ["unsafe"] * 8
+    judge = ["safe"] * 7 + ["unsafe"] * 5 + ["unsafe"] * 7 + ["safe"]
+    a = agreement(human, judge)
+    assert a.precision_unsafe == pytest.approx(7 / 12)
+    assert a.recall_unsafe == pytest.approx(7 / 8)
+    assert a.balanced_accuracy == pytest.approx((7 / 12 + 7 / 8) / 2)
+    assert a.f1_unsafe == pytest.approx(2 * (7 / 12) * (7 / 8) / (7 / 12 + 7 / 8))
+
+
+def test_always_safe_judge_has_high_accuracy_but_chance_balanced_accuracy():
+    human = ["safe"] * 110 + ["unsafe"] * 90            # the committed sample's balance
+    a = agreement(human, ["safe"] * 200)
+    assert a.accuracy == pytest.approx(0.55)
+    assert a.balanced_accuracy == pytest.approx(0.5)
+    assert a.recall_unsafe == 0 and a.precision_unsafe == 0

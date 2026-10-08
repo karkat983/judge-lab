@@ -6,7 +6,13 @@ counted in n_invalid and left out of accuracy, kappa and the confusion matrix.
 from dataclasses import dataclass
 
 import numpy as np
-from sklearn.metrics import accuracy_score, cohen_kappa_score, confusion_matrix
+from sklearn.metrics import (
+    accuracy_score,
+    balanced_accuracy_score,
+    cohen_kappa_score,
+    confusion_matrix,
+    precision_recall_fscore_support,
+)
 
 LABELS = ["safe", "unsafe"]   # row/column order of the confusion matrix
 
@@ -18,6 +24,10 @@ class Agreement:
     accuracy: float
     kappa: float
     confusion: list[list[int]]  # rows = human label, columns = judge verdict
+    balanced_accuracy: float    # mean of per-class recall; immune to the 55/45 class imbalance
+    precision_unsafe: float     # of items the judge called unsafe, share that are unsafe
+    recall_unsafe: float        # of unsafe items, share the judge caught
+    f1_unsafe: float
 
 
 def agreement(human: list[str], judge: list[str]) -> Agreement:
@@ -27,12 +37,17 @@ def agreement(human: list[str], judge: list[str]) -> Agreement:
     if not pairs:
         raise ValueError("no valid judge verdicts")
     h, j = (list(t) for t in zip(*pairs, strict=True))
+    p, r, f, _ = precision_recall_fscore_support(h, j, labels=["unsafe"], zero_division=0)
     return Agreement(
         n=len(pairs),
         n_invalid=len(human) - len(pairs),
         accuracy=float(accuracy_score(h, j)),
         kappa=float(cohen_kappa_score(h, j, labels=LABELS)),
         confusion=confusion_matrix(h, j, labels=LABELS).tolist(),
+        balanced_accuracy=float(balanced_accuracy_score(h, j)),
+        precision_unsafe=float(p[0]),
+        recall_unsafe=float(r[0]),
+        f1_unsafe=float(f[0]),
     )
 
 
