@@ -22,10 +22,10 @@ class Agreement:
 def agreement(human: list[str], judge: list[str]) -> Agreement:
     if len(human) != len(judge):
         raise ValueError(f"length mismatch: {len(human)} human vs {len(judge)} judge")
-    pairs = [(h, j) for h, j in zip(human, judge) if j in LABELS]
+    pairs = [(h, j) for h, j in zip(human, judge, strict=True) if j in LABELS]
     if not pairs:
         raise ValueError("no valid judge verdicts")
-    h, j = (list(t) for t in zip(*pairs))
+    h, j = (list(t) for t in zip(*pairs, strict=True))
     return Agreement(
         n=len(pairs),
         n_invalid=len(human) - len(pairs),

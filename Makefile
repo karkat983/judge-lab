@@ -1,7 +1,7 @@
 # Common tasks. Run `make help` for a list.
 PYTHON ?= .venv/bin/python
 
-.PHONY: help setup data test clean
+.PHONY: help setup data lint test clean
 
 help:      ## list targets
 	@grep -E '^[a-z]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-8s %s\n", $$1, $$2}'
@@ -11,6 +11,9 @@ setup:     ## create .venv and install dependencies
 
 data:      ## download XSTest and rebuild the 200-prompt sample
 	$(PYTHON) scripts/fetch_data.py
+
+lint:      ## ruff lint
+	$(PYTHON) -m ruff check .
 
 test:      ## offline unit tests (no LLM calls)
 	$(PYTHON) -m pytest -q -m "not live"
