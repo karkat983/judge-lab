@@ -33,3 +33,34 @@ def test_sample_keeps_category_shares():
     picked = stratified_sample(rows(), 10, key="category", seed=7)
     assert Counter(r["category"] for r in picked) == {"a": 5, "b": 3, "c": 2}
     assert len({r["id"] for r in picked}) == 10
+
+
+def test_different_seeds_give_different_samples():
+    a = stratified_sample(rows(), 10, key="category", seed=1)
+    b = stratified_sample(rows(), 10, key="category", seed=2)
+    assert {r["id"] for r in a} != {r["id"] for r in b}
+
+
+def test_committed_sample_is_reproducible_from_the_raw_file():
+    """Re-running the sampler with the config seed on XSTest gives exactly data/prompts.csv."""
+    import csv
+    import importlib.util
+
+    import pytest
+
+    from src.config import load_config, resolve
+
+    cfg = load_config()["data"]
+    raw = resolve(cfg["raw_path"])
+    if not raw.exists():
+        pytest.skip("raw XSTest file not downloaded (python scripts/fetch_data.py)")
+    spec = importlib.util.spec_from_file_location("fetch_data", resolve("scripts/fetch_data.py"))
+    fetch = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(fetch)
+    with open(raw, newline="") as f:
+        source = [fetch.to_row(r) for r in csv.DictReader(f)]
+    sample = sorted(stratified_sample(source, cfg["sample_size"], key="category", seed=cfg["seed"]),
+                    key=lambda r: r["id"])
+    with open(resolve(cfg["prompts_path"]), newline="") as f:
+        committed = list(csv.DictReader(f))
+    assert [r["id"] for r in sample] == [r["id"] for r in committed]
