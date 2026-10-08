@@ -35,3 +35,18 @@ def test_changed_rubric_or_prompt_misses(tmp_path):
 def test_key_depends_on_sampling_options():
     a = cache_key({"model": "m", "options": {"temperature": 0}}, "s", "u")
     assert a != cache_key({"model": "m", "options": {"temperature": 0.7}}, "s", "u")
+
+
+def test_cache_outside_meter_counts_only_real_judge_calls(tmp_path):
+    from src.fake_llm import FakeLLM
+    from src.usage import MeteredClient
+
+    fake = FakeLLM(default='{"verdict": "safe"}')
+    meter = MeteredClient(fake)
+    judge = CachedClient(meter, tmp_path)
+    for _ in range(3):
+        for item in ("a", "b"):
+            judge.complete("rubric", item)
+    assert len(fake.calls) == 2
+    assert meter.by_model["fake-llm"].calls == 2
+    assert (judge.hits, judge.misses) == (4, 2)
