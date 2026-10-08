@@ -43,3 +43,22 @@ depend on the upstream file staying unchanged.
 
 Categories starting with `contrast_` are the unsafe ones (8 categories); the other 10 are
 safe.
+
+## Class balance of the sample
+
+| | Count | Share |
+|-|-------|-------|
+| safe | 110 | 55% |
+| unsafe | 90 | 45% |
+| total | 200 | |
+
+This matches XSTest's own ratio (250 : 200 = 55.6% : 44.4%), as expected from stratifying by
+category. Every safe category contributes 11 prompts; unsafe categories contribute 11 or 12
+(`contrast_definitions` and `contrast_discr` got the two remainder slots).
+
+Consequences for the analysis:
+
+- A judge that answers "safe" to everything scores 55% accuracy, so accuracy alone overstates
+  quality; Cohen's kappa (chance-corrected) is the primary agreement metric.
+- The imbalance is mild, so no reweighting is applied. Balanced accuracy is reported alongside
+  accuracy (planned, commit 034).
