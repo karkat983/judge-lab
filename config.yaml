@@ -1,0 +1,14 @@
+# All tunable values live here so a reader can swap them without touching code.
+
+judge:
+  provider: anthropic           # any chat model with an API works
+  model: claude-haiku-5-5
+  temperature: 0
+
+data:
+  source_url: https://raw.githubusercontent.com/paul-rottger/xstest/main/xstest_prompts.csv
+  raw_path: data/raw/xstest_prompts.csv
+  prompts_path: data/prompts.csv
+  sample_size: 200
+  stratify_by: type             # keep every XSTest category represented
+  seed: 13
