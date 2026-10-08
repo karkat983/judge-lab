@@ -12,7 +12,7 @@ import urllib.request
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 from src.config import load_config, resolve  # noqa: E402
-from src.sample import stratified_sample  # noqa: E402
+from src.sample import deduplicate, stratified_sample  # noqa: E402
 
 FIELDS = ["id", "text", "human_label", "category", "focus"]
 
@@ -40,6 +40,9 @@ def main() -> None:
         download(cfg["source_url"], raw_path)
     with open(raw_path, newline="") as f:
         rows = [to_row(r) for r in csv.DictReader(f)]
+    rows, dropped = deduplicate(rows)
+    for dup, original in dropped:
+        print(f"dropped {dup}: same text as {original}")
 
     sample = stratified_sample(rows, cfg["sample_size"], key="category", seed=cfg["seed"])
     sample.sort(key=lambda r: r["id"])

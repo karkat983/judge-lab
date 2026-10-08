@@ -1,6 +1,8 @@
 """Deterministic stratified sampling, so every category keeps its share."""
 import math
 import random
+import re
+import unicodedata
 from collections import defaultdict
 
 
@@ -32,3 +34,24 @@ def stratified_sample(rows: list[dict], n: int, key: str, seed: int) -> list[dic
     for g in sorted(groups):
         picked.extend(rng.sample(groups[g], counts[g]))
     return picked
+
+
+def normalise(text: str) -> str:
+    """Text used to detect duplicates: case-folded, accents and punctuation removed, spaces collapsed."""
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    text = re.sub(r"[^\w\s]", " ", text.casefold())
+    return " ".join(text.split())
+
+
+def deduplicate(rows: list[dict], key: str = "text") -> tuple[list[dict], list[tuple[str, str]]]:
+    """Keep the first row of each normalised text. Returns (kept rows, [(dropped id, kept id)])."""
+    seen: dict[str, str] = {}
+    kept, dropped = [], []
+    for row in rows:
+        norm = normalise(row[key])
+        if norm in seen:
+            dropped.append((row["id"], seen[norm]))
+        else:
+            seen[norm] = row["id"]
+            kept.append(row)
+    return kept, dropped
