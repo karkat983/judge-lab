@@ -28,4 +28,4 @@ LLMs are increasingly used to grade other models' outputs, but a grader is only 
 Public data only (XSTest, Röttger et al. 2024, CC BY 4.0). Not affiliated with any employer. Built October 2026.
 
 ## Changelog
-- Day 1: project scaffold.
+- Day 1: project scaffold and changelog.
