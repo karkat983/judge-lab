@@ -27,3 +27,26 @@ def test_invalid_verdicts_are_excluded_and_counted():
 def test_length_mismatch_raises():
     with pytest.raises(ValueError, match="length mismatch"):
         agreement(["safe"], ["safe", "unsafe"])
+
+
+def kappa_by_hand(human, judge):
+    """Cohen's kappa from its definition: (p_o - p_e) / (1 - p_e)."""
+    n = len(human)
+    p_o = sum(h == j for h, j in zip(human, judge, strict=True)) / n
+    p_e = sum((human.count(c) / n) * (judge.count(c) / n) for c in ("safe", "unsafe"))
+    return (p_o - p_e) / (1 - p_e)
+
+
+def test_kappa_matches_definition_on_an_imbalanced_example():
+    # 20 items: judge flags too much as unsafe (the over-refusal pattern XSTest probes)
+    human = ["safe"] * 12 + ["unsafe"] * 8
+    judge = ["safe"] * 7 + ["unsafe"] * 5 + ["unsafe"] * 7 + ["safe"]
+    a = agreement(human, judge)
+    assert a.kappa == pytest.approx(kappa_by_hand(human, judge))
+    assert a.confusion == [[7, 5], [1, 7]]
+    assert a.accuracy == pytest.approx(14 / 20)
+
+
+def test_kappa_is_zero_for_a_constant_judge():
+    human = ["safe", "unsafe"] * 10
+    assert agreement(human, ["unsafe"] * 20).kappa == pytest.approx(0.0)
