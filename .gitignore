@@ -5,3 +5,11 @@ __pycache__/
 .pytest_cache/
 data/raw/
 data/cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+runs/
+results/
+.DS_Store

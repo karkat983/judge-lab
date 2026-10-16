@@ -1,0 +1,16 @@
+# Judge Lab operating instructions
+
+Read and follow [the canonical MVP instructions](JUDGE_LAB_CODEX_MVP_PACK/AGENTS.md).
+The pack's relative `specs/`, `prompts/`, `templates/` and `reference/` paths resolve
+within `JUDGE_LAB_CODEX_MVP_PACK/`. Do not maintain duplicate specification copies.
+Explicit user instructions take precedence. Read the latest root `worklogs/` handoff.
+
+Current authorized scope: Phase 01 bootstrap/contracts only. Stop before Phase 02.
+The old `src.*` safe/unsafe workflow remains separate from the installable
+`judge_lab` ACCEPT/REJECT/ABSTAIN contracts. Preserve legacy code and tests.
+
+Run `make test`, `make lint`, `make typecheck`. Tests default to offline; never
+enable `live` or call provider APIs without explicit authorization.
+
+The requested `specs/04-SECURITY-AND-PRIVACY.md` does not exist in this edition;
+use [spec 06](JUDGE_LAB_CODEX_MVP_PACK/specs/06-SECURITY-BOUNDARIES.md).

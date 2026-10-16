@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77,<85"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "judge-lab"
+version = "0.1.0"
+description = "Offline contracts and provenance for security-investigation judge evaluation"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = ["pydantic>=2.10,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.6,<1", "mypy>=1.13,<2", "build>=1,<2"]
+legacy = ["numpy>=2,<3", "pandas>=2.2,<4", "scikit-learn>=1.5,<2", "PyYAML>=6,<7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["judge_lab", "judge_lab.*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+judge_lab = ["py.typed"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/judge_lab"]
+strict = true
+plugins = ["pydantic.mypy"]
+mypy_path = "src"
+explicit_package_bases = true

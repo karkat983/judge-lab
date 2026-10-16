@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "created_at_utc": "2026-10-17T00:00:00Z",
+  "run_id": "sha256:2bf62734d4a3f031fdf50df8c5571f14f96e2f958863385c834f627461f155ae",
+  "dataset_digest": "sha256:386222917fab7c3361ec6258865a707b912083b5c637d99b5eeb2b8fb9f1ba38",
+  "dataset_manifest_digest": "sha256:ed516a0ca74da85c9ef195ee45f9fb7b27e3794282bd1596d5fb80e77e12d1c7",
+  "label_protocol_revision": "planted-rules-v1",
+  "rubric_digest": "sha256:e1e809cdc6f322f86154b33bad7b9211c56bee650572438a1ca65a1cb613fa1e",
+  "judge_spec_digest": "sha256:cf3637e02ca92e3868531224674ab9104a5e9dbabb7151e8885b5db6fac445d0",
+  "split_digest": "sha256:0daeed58e6bb5e2bf2dfdbf1a47b0a6529083a40b5da56fb56e3ec1398cc32aa",
+  "adapter_version": "fixture-v1",
+  "run_seed": 44,
+  "environment": {
+    "python": "3.12",
+    "platform": "synthetic-fixture",
+    "package_version": "0.1.0"
+  },
+  "limits": {
+    "max_calls": 10,
+    "timeout_seconds": 20.0,
+    "max_cost_usd": 0.0
+  }
+}
