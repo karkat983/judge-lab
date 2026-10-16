@@ -147,4 +147,8 @@ every later-phase ADR. No public legacy contract was changed.
 
 Remaining public-contract choices for phases 02–08 (probe trust surfaces, report
 field mapping, gate uncertainty/override semantics) are not silently resolved here.
-Phase 02 remains unauthorized until a new user instruction.
+The subsequent user instruction authorizes phases 02–10, sequential checks,
+commits/pushes and removal of confirmed obsolete/generated files. Per-phase approval
+pauses are superseded; human annotations, pilot participation and independent
+review cannot be supplied by authorization alone. Preserve reusable legacy code;
+remove only confirmed redundant/generated material and record cleanup separately.

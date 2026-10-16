@@ -5,7 +5,10 @@ The pack's relative `specs/`, `prompts/`, `templates/` and `reference/` paths re
 within `JUDGE_LAB_CODEX_MVP_PACK/`. Do not maintain duplicate specification copies.
 Explicit user instructions take precedence. Read the latest root `worklogs/` handoff.
 
-Current authorized scope: Phase 01 bootstrap/contracts only. Stop before Phase 02.
+Current authorization: implement phases 02–10 sequentially, validate each, commit
+and push coherent changes to the existing remote. The user supersedes per-phase
+approval pauses. Missing real labels/pilot participation/external review must be
+reported as unavailable, never fabricated. Keep empirical gates explicit.
 The old `src.*` safe/unsafe workflow remains separate from the installable
 `judge_lab` ACCEPT/REJECT/ABSTAIN contracts. Preserve legacy code and tests.
 
