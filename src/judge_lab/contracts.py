@@ -1,7 +1,7 @@
 """Frozen v1 boundary models. Validation failures expose codes, never submitted values."""
 
 from datetime import datetime, timedelta
-from typing import Annotated, Any, Literal, Self
+from typing import Annotated, Any, Literal, Self, get_args, get_origin
 
 from pydantic import (
     BaseModel,
@@ -10,6 +10,7 @@ from pydantic import (
     ModelWrapValidatorHandler,
     StringConstraints,
     ValidationError,
+    ValidationInfo,
     field_validator,
     model_validator,
 )
@@ -50,7 +51,13 @@ class FrozenModel(BaseModel):
 
     @field_validator("*", mode="before")
     @classmethod
-    def freeze_arrays(cls, value: Any) -> Any:
+    def freeze_arrays(cls, value: Any, info: ValidationInfo) -> Any:
+        annotation = cls.model_fields[info.field_name].annotation if info.field_name else None
+        # Pydantic Literal[True/False] otherwise accepts equal integer values even in strict mode.
+        if (get_origin(annotation) is Literal
+                and any(type(item) is bool for item in get_args(annotation))
+                and type(value) is not bool):
+            raise ContractError("INVALID_INPUT")
         # JSON arrays become tuples; element values still undergo strict validation.
         return tuple(value) if isinstance(value, list) else value
 

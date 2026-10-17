@@ -119,11 +119,6 @@ def test_tamper_and_injected_authority_reject(report_factory):
 
 def test_coverage_not_conditional_accuracy_controls_gate(report_factory):
     # Both classes retain >30 answered cases, yet coverage is only 80%.
-    report = report_factory(100, evidence="HUMAN_ADJUDICATED")
-    predictions = tuple(
-        o.reference if i % 5 else "ABSTAIN"
-        for i, o in enumerate(sorted(report.observations, key=lambda o: o.case_ref))
-    )
     # Use original cyclic label order for the generated cases.
     refs = (
         "ACCEPT",

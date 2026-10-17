@@ -200,7 +200,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--selection", type=Path)
     parser.add_argument("--run-manifest", type=Path)
     parser.add_argument("--predictions", type=Path)
-    parser.add_argument("--reviewer-minutes", type=float, default=0)
+    parser.add_argument("--reviewer-minutes", type=float)
     args = parser.parse_args(argv)
     try:
         dataset = load_dataset(args.data, args.manifest)
@@ -228,7 +228,8 @@ def main(argv: list[str] | None = None) -> int:
                 },
             )
         else:
-            if not args.selection or not args.run_manifest or not args.predictions:
+            if (not args.selection or not args.run_manifest or not args.predictions
+                    or args.reviewer_minutes is None):
                 raise ContractError("INVALID_INPUT")
             report = evaluate_baseline(
                 dataset,

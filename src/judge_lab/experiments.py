@@ -149,7 +149,7 @@ def compare(
                 "resources": ledger.resources.model_dump(mode="json"),
                 "false_alarms": ledger.false_alarms,
                 "invalid_probes": ledger.invalid_probes,
-                "clean_case_coverage": report.statistics.metrics["coverage"].model_dump(mode="json"),
+                "unperturbed_case_coverage": report.statistics.metrics["coverage"].model_dump(mode="json"),
             }
         )
     payload: dict[str, object] = {

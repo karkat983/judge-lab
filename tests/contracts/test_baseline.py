@@ -171,9 +171,24 @@ def test_complete_200_pipeline_on_explicit_test_data(dataset, spec, run, tmp_pat
     path.write_bytes(b"\n".join(canonical_bytes(r) for r in results))
     report = evaluate_baseline(selected, records, selection, bound, path, 0)
     assert report.statistics.denominators["eligible_total"] == 200
+    from judge_lab.reports import read_report
+    report_path = tmp_path / "large-report.json"
+    report_path.write_bytes(canonical_bytes(report))
+    assert report_path.stat().st_size > 256 * 1024
+    assert read_report(report_path) == report
     changed = decode_model(
         Adjudication,
         canonical_bytes({**records[0].model_dump(mode="json"), "reviewer_ids": ["other-1", "other-2"]}),
     )
     with pytest.raises(ContractError):
         evaluate_baseline(selected, (changed, *records[1:]), selection, bound, path, 0)
+
+
+@pytest.mark.parametrize("field", ["independent_of_judge", "frozen"])
+def test_adjudication_requires_actual_boolean(field):
+    record = dict(schema_version="1.0", case_id="test", case_digest=digest("test"),
+        reviewer_ids=["a", "b"], reviewer_labels=["ACCEPT", "ACCEPT"], status="AGREED",
+        final_label="ACCEPT", adjudicator_id=None, independent_of_judge=True, frozen=True, source="HUMAN")
+    record[field] = 1
+    with pytest.raises(ContractError):
+        decode_model(Adjudication, canonical_bytes(record))
