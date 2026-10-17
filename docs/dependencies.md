@@ -1,7 +1,7 @@
-# Phase 01 dependencies
+# Dependencies and reproducibility
 
-The installable package has one direct runtime dependency: **Pydantic v2**, for
-strict typed validation and JSON Schema generation. It uses stdlib JSON, hashing,
+The installable package has two direct runtime dependencies: **Pydantic v2**, for
+strict validation/JSON Schema, and **PyYAML**, for bounded safe configuration. It uses stdlib JSON, hashing,
 dataclasses and filesystem access; there is no service, database or provider SDK.
 Runtime dependencies stay separate from the retained legacy experiment stack.
 
@@ -32,7 +32,8 @@ copied into the new package.
 | SciPy | Existing sklearn dependency | BSD family plus bundled distribution notices |
 | narwhals | sklearn dependency | MIT |
 | python-dateutil | pandas dependency | BSD/Apache dual license |
-| six, PyYAML | Legacy compatibility/config | MIT |
+| six | Legacy compatibility | MIT |
+| PyYAML | Bounded safe YAML configuration (runtime) | MIT |
 
 Matplotlib, python-dotenv and Anthropic remain listed in the unchanged legacy
 `requirements.txt`; they are not needed or installed for Phase 01 offline tests.
@@ -40,4 +41,6 @@ No live provider model/pricing assumptions were verified. The existing sampling,
 statistics, fake LLM and retry/rate-limit implementations stay in place with their
 regression tests. The new isolation test also reuses FakeLLM directly, without the
 legacy verdict parser. Migrating these helpers into an executing runner or metrics
-kernel is deliberately deferred to their authorized phases.
+kernel was limited to reviewed concepts and independent numeric tests. New label
+semantics remain isolated. SciPy/sklearn also provide an independent numerical
+sample audit in tests/contracts/test_independent_numerics.py.

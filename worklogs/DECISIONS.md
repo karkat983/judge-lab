@@ -163,3 +163,30 @@ aggregates. YAML is bounded with aliases/duplicate keys rejected. Baseline selec
 requires independent adjudication declarations and freezes selected labels/metadata.
 Report documents have a separate 16 MiB bound; single records remain 256 KiB.
 All empirical claims remain conditional on externally authenticated provenance.
+
+## Phases 06–10 dispositions and remaining scope
+
+- Probe surface is report_text only; authoritative evidence/policy/reference/rubric
+  stay protected. Only the exact planted prohibited-action oracle confirms validity;
+  formatting and semantic changes require review. One attempt/zero retries is the
+  bounded default. No runtime agents or providers added.
+- Comparison v1 matches total resource declarations and frozen subject observations,
+  deduplicates family/type discoveries and preserves negative results. Novel
+  transformed-population H2 comparison is an explicit incomplete requirement, not
+  a claim of successful differentiation. See final review P1-03.
+- Gate policies bind expected data/subject and reviewed evidence. Undefined metrics,
+  small classes, absent holdout and synthetic evidence cannot PASS. Approval hashes
+  are references, not authenticated proof or numeric-policy overrides.
+- Pilot summaries exclude incomplete, withdrawn and synthetic records. Actual real
+  completed pilots remain zero. No outreach or fabricated observation.
+- Pre-final integration corrected boolean-literal coercion (1 is not true), required
+  explicitly supplied baseline reviewer minutes, and explicitly packaged fixtures
+  to remove a setuptools discovery warning. These preserve intended strict contracts.
+- Removed generated OS/build/cache clutter only; preserved legacy working modules,
+  tests, sample/attribution, ignored historical user plans and Git history. Moved
+  old README detail into docs/legacy-xstest.md and refreshed current documentation.
+- Final self-review reproduced a concurrent-output ownership defect. In accordance
+  with Phase 10's explicit no-auto-fix instruction for high-risk findings, recorded
+  P1-01 and a bounded follow-up instead of rewriting filesystem behavior in review.
+  Independent external approval remains pending; numeric cross-library checks do
+  not substitute for an independent security/scientific reviewer.

@@ -1,4 +1,4 @@
-# Phase 01 contract guide
+# Implemented v1 contract guide
 
 The canonical MVP specification remains in `JUDGE_LAB_CODEX_MVP_PACK/specs/`.
 This document records the implemented v1 decisions, including the details added
@@ -25,7 +25,7 @@ This is a data integrity boundary, not a sandbox against a malicious Python call
 | Case | Required nonempty ID/family/rubric; fixed split enum; reference ACCEPT/REJECT only; `reference_frozen` must be boolean true; REJECT needs reason codes; evidence IDs unique. |
 | JudgeInput | Explicit allowlist: schema/rubric revision, report, evidence, policy. No case ID/family, split, reference, reasons, adjudication or prior outcomes. |
 | DatasetRevision | Source, permission/license, label protocol/provenance, UTC creation time, declared evidence status, split algorithm/seed, canonical case digest. Evidence status is a declaration, not independent certification. |
-| JudgeSpec | Offline `deterministic_mock` or `imported` only; typed settings and limits; strict-label parser identifier. No new adapter executes yet. |
+| JudgeSpec | Offline `deterministic_mock` or `imported` only; typed settings and limits; strict-label parser identifier. Deterministic mock and strict imported predictions execute offline. |
 | JudgeResult | ACCEPT/REJECT/ABSTAIN require null error kind. ERROR requires a typed error kind. No raw output is accepted (`raw_output_ref` is null). Case/run/spec digests bind results; unknown cost is null, not automatically free. |
 | RunManifest | Dataset, dataset manifest, label protocol, rubric, judge spec, splits/families, adapter version, seed, environment/package version and limits are bound to a deterministic digest. |
 
@@ -35,8 +35,8 @@ within one split. This is structural leakage prevention; it does not prove cases
 are independently sampled or prevent a researcher from tuning on holdout data.
 
 Missing/disputed/unlabeled references reject the entire batch with INVALID_INPUT;
-there is no silent exclusion, inferred label or partial success. An adjudication
-intake/exclusion workflow is deferred. CSV stays in the legacy pipeline.
+there is no silent exclusion, inferred label or partial success. Independent adjudication intake is implemented in `judge_lab.baseline`; disputed
+records remain ineligible for a completed baseline. CSV stays in the legacy pipeline.
 
 ## Canonicalization and provenance
 
@@ -56,8 +56,7 @@ manifest is separately hashed into the run, including rights and label provenanc
 `build_run_manifest` verifies the dataset first and rejects case/judge rubric
 revision mismatch. Run identity includes the typed settings and environment.
 `created_at_utc` is recorded but excluded from **run compatibility identity**:
-re-evaluating the same frozen inputs later produces the same run ID. Phase 02
-must distinguish individual attempts if needed; there is no resume store here.
+re-evaluating the same frozen inputs later produces the same run ID. Each artifact bundle is an explicit attempt; there is no resume/cache store here.
 
 Before reuse, call `require_compatible_run(stored, expected)` where `expected` is
 rebuilt from trusted current inputs. Call `verify_result(result, case, run, dataset)`
@@ -71,7 +70,8 @@ artifacts, not an authenticated origin or actual model execution.
 `ContractError` exposes a fixed code, not submitted content, IDs, file paths or
 validation details. Reprs omit private fields. There are no new package log calls.
 `LoadedDataset.summary()` emits only schema, case count, dataset hash and declared
-evidence status. It is the safe default inspection output; no reports exist yet.
+evidence status. It is the safe default inspection output. Reports contain hashed identifiers,
+observations and aggregate counts; they omit source report/evidence text.
 
 `model_dump`, `canonical_bytes`, `dataset_jsonl` and `judge_input` deliberately
 contain private input data. Do not log them or expose them as public reports.
@@ -86,12 +86,25 @@ at 256 KiB and nesting at 32 levels. Text fields cap at 32,768 characters; evide
 and action/reason lists at 64 entries. Input is read-only; blank records are invalid.
 No arbitrary code, HTML, shell expressions, or YAML tags are executed. API callers
 must use these bounded loaders for untrusted files. Serialization returns bytes;
-safe output-directory/atomic-write behavior belongs to later artifact/CLI phases.
+`artifacts.write_bundle` stages owned output bundles and rejects existing paths
+without explicit overwrite. Use a private directory; concurrent writers are unsupported.
 
-## Remaining phase gates
+## Subsequent contracts
 
-Phase 02 implements strict model-output parsing, mock/import adapters, normalized
-result joins and execution budgets. Phase 01 validates their data contracts only.
-Statistics/Wilson intervals belong to Phase 03; CLI/HTML reports to Phase 04;
-baseline, probes, comparisons, gates and pilots remain unimplemented. Nothing here
-asserts scientific validity, product effectiveness or release eligibility.
+`runner` binds strict predictions and explicit system errors. `metrics` computes
+confusion, coverage, kappa and Wilson intervals; correlated families suppress
+independent-case intervals. `reports.read_report` uses a separate 16 MiB document
+bound, verifies digests/run identity and recomputes aggregate statistics. Single
+case/config records retain the smaller limit. Slices remain descriptive summaries.
+
+`baseline` freezes family selection and independent adjudication declarations.
+`probes` restricts transformations to report_text; an independent planted-rule
+oracle decides narrow validity. `experiments` compares identical frozen subject
+observations at equal declared resources and preserves negative outcomes. Novel
+probe-population comparison is not implemented. `gates` keeps deterministic policy
+decisions separate from model verdicts and requires bound reviewed evidence.
+`pilots` validates records without creating real participants or consent.
+
+All are v1 proposal completions with strict extra-field rejection. Gate evidence,
+labels and reviewer identities are declarations requiring external authentication.
+No scientific validity, product effectiveness or production readiness is implied.

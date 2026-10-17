@@ -1,7 +1,7 @@
 # judge-lab
 
-> Status: **Offline calibration CLI implemented.** Strict contracts, mock/imported
-> predictions, uncertainty metrics and JSON/HTML evidence reports are available.
+> Status: **Local MVP tooling implemented; empirical validation pending.** Calibration, fixed
+> probes, baseline/comparison workflows, conservative gates and pilot records are available.
 > Synthetic demonstrations are not empirical validation or a safety certification.
 
 The current MVP evaluates judges of **security-investigation reports** using separate
@@ -9,7 +9,7 @@ The current MVP evaluates judges of **security-investigation reports** using sep
 Execution failures are typed `ERROR` outcomes. The existing XSTest safe/unsafe
 experiment remains under `src.*` and is described below as legacy functionality.
 See the [roadmap](ROADMAP.md), [contract guide](docs/contracts-v1.md), and
-[Phase 01 handoff](worklogs/01-bootstrap-contracts.md).
+[final review](reviews/GO-NO-GO.md).
 
 ## Install and validate offline
 
@@ -50,48 +50,48 @@ Existing output requires `--overwrite` and Judge Lab ownership; unowned director
 and symlinks reject. Import requires exact case IDs and compatible run provenance.
 
 `requirements-dev.lock` pins the tested development environment. `pyproject.toml`
-declares the minimal runtime dependency and separate dev/legacy extras. The old
+declares the minimal runtime dependencies and separate dev/legacy extras. The old
 `requirements.txt` remains available for the legacy provider workflow.
 
-## Legacy XSTest experiment
+## Controlled probes and policy gates
 
-## Problem
-LLMs are increasingly used to grade other models' outputs, but a grader is only useful if its verdicts track human judgement and cannot be steered by the text it is grading. This matters because safety evaluations, leaderboards and guardrails all inherit whatever bias or weakness the judge has. See Zheng et al. 2023, "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena".
-
-## Approach
-*Planned.* Run an LLM judge over a labelled public set of safe and unsafe prompts (XSTest), measure agreement with the human labels (accuracy, Cohen's kappa), test position and verbosity bias, and test whether an instruction hidden in the graded text flips the verdict.
-
-## Results
-*Planned.* No numbers yet.
-
-| Metric | Value |
-|--------|-------|
-| Judge vs human accuracy | — |
-| Cohen's kappa | — |
-| Verdict flip rate under swap | — |
-| Judge-injection success rate | — |
-
-## Legacy setup (optional)
 ```bash
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python scripts/fetch_data.py     # XSTest -> stratified 200-prompt sample in data/prompts.csv
-pytest -m "not live"
+.venv/bin/judge-lab probe --data examples/security_fixture.jsonl \
+  --dataset-manifest examples/security_manifest.json --judge examples/mock_judge.json \
+  --manifest examples/probe_manifest.json --vulnerable-mock --out runs/probe-demo
+.venv/bin/judge-lab gate --report runs/demo/report.json \
+  --policy examples/gate_policy.yaml
 ```
-The legacy judge plumbing exists; empirical judge runs, bias and injection results
-remain unreported. The data download is unnecessary for Phase 01.
 
-## What I learned
-*Planned.*
+The vulnerable mock is deliberately flawed. One planted-rule failure demonstrates
+code behavior, not robustness of a real judge. The synthetic gate exits **4
+(INCONCLUSIVE)**. No model can authorize a gate. See [gate policy](docs/gates.md)
+for statuses, reviewed evidence and approval records; no production bypass exists.
 
-## Notes
-Public data only (XSTest, Röttger et al. 2024, CC BY 4.0). Not affiliated with any employer. Built October 2026.
+## Baseline, experiments and pilots
 
-## Changelog
-- Day 1: project scaffold and changelog; XSTest sampler, loader, agreement stats.
-- Committed the 200-prompt sample with source, licence and data card; label review of 30 items
-  (28 agree, 2 ambiguous, 0 clear disagreements; docs/label_review.md).
-- LLM layer: local Ollama judge by default (qwen2.5:3b-instruct), Claude optional; cache, cost
-  meter, retry with backoff, rate limiting, scripted fake LLM for tests.
-- Statistics: Cohen's kappa checked against its definition, bootstrap CI (coverage-tested),
-  balanced accuracy and precision/recall for the unsafe class.
+- [200-case baseline protocol](experiments/baseline_200/PROTOCOL.md):
+  `python -m judge_lab.baseline --help`; requires authorized independent labels.
+- [Matched-resource comparison](experiments/DIFFERENTIATION-PROTOCOL.md):
+  `python -m judge_lab.experiments --help`; zero/negative results are valid.
+- [Pilot toolkit](pilots/README.md): five blank records; **zero real pilots**.
+- [Competitor capability review](experiments/COMPETITOR-MATRIX.md): primary-source
+  documentation, not a comparative benchmark or superiority claim.
+
+Empirical B0/H1/H2 are NOT PERFORMED. Novel transformed-population comparisons,
+external independent review and five real sessions remain outstanding. Hashes
+check consistency, not truth or authenticity; source evidence needs a trusted
+custodian. Output paths assume a private local directory without concurrent writers.
+See [review findings](reviews/INDEPENDENT-REVIEW.md) before using confidential data.
+
+The [legacy XSTest workflow](docs/legacy-xstest.md), its source/tests, sample and
+attribution are preserved. Legacy safe/unsafe outputs are never silently mapped
+into ACCEPT/REJECT. Generated build/cache clutter can be removed; historical
+source and user-authored plans are retained.
+
+## Curriculum coverage
+
+This project primarily addresses **#29, Calibrated LLM-as-Judge Eval Framework**,
+with partial overlap in **#13, #14, #16, #20 and #21**: six relevant problems out
+of 38, one primary. That is scope coverage, not six completed curriculum projects.
+See the [audit mapping](worklogs/00-repo-audit.md#ai-engineer-curriculum-coverage).
