@@ -40,12 +40,29 @@ def parser() -> argparse.ArgumentParser:
         probe.add_argument("--" + option, type=Path, required=True)
     probe.add_argument("--vulnerable-mock", action="store_true")
     probe.add_argument("--predictions", type=Path)
+    gate = sub.add_parser("gate")
+    gate.add_argument("--report", type=Path, required=True)
+    gate.add_argument("--policy", type=Path, required=True)
+    gate.add_argument("--evidence", type=Path)
+    gate.add_argument("--baseline", type=Path)
+    gate.add_argument("--out", type=Path)
     return root
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
+        if args.command == "gate":
+            from judge_lab.gates import GateEvidence, GatePolicy, evaluate_gate
+            from judge_lab.reports import read_report
+            from judge_lab.serialization import canonical_bytes
+            result = evaluate_gate(read_report(args.report), read_config(GatePolicy, args.policy),
+                read_config(GateEvidence, args.evidence) if args.evidence else None,
+                read_report(args.baseline) if args.baseline else None)
+            if args.out:
+                write_bundle(args.out, {"decision.json": canonical_bytes(result)})
+            print(result.model_dump_json())
+            return result.exit_code
         if args.command == "probe":
             from judge_lab.probes import command
             summary = command(args.data, args.dataset_manifest, args.judge, args.manifest,

@@ -22,3 +22,14 @@ jobs:
         run: pytest -q -m "not live"
       - name: New package types
         run: mypy src/judge_lab
+      - name: Offline gate must reject synthetic evidence
+        run: |
+          judge-lab demo --out runs/ci-demo
+          python - <<'PY'
+          import subprocess
+          result = subprocess.run([
+              "judge-lab", "gate", "--report", "runs/ci-demo/report.json",
+              "--policy", "examples/gate_policy.yaml",
+          ], check=False)
+          assert result.returncode == 4, result.returncode
+          PY
