@@ -35,12 +35,23 @@ def parser() -> argparse.ArgumentParser:
     demo = sub.add_parser("demo")
     demo.add_argument("--out", type=Path, default=Path("runs/demo"))
     demo.add_argument("--overwrite", action="store_true")
+    probe = sub.add_parser("probe")
+    for option in ("data", "dataset-manifest", "judge", "manifest", "out"):
+        probe.add_argument("--" + option, type=Path, required=True)
+    probe.add_argument("--vulnerable-mock", action="store_true")
+    probe.add_argument("--predictions", type=Path)
     return root
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
+        if args.command == "probe":
+            from judge_lab.probes import command
+            summary = command(args.data, args.dataset_manifest, args.judge, args.manifest,
+                              args.out, args.vulnerable_mock, args.predictions)
+            print(summary.model_dump_json())
+            return 0
         if args.command == "demo":
             resource = files("judge_lab").joinpath("fixtures")
             args.data = Path(str(resource.joinpath("security_fixture.jsonl")))
