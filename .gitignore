@@ -13,3 +13,6 @@ dist/
 runs/
 results/
 .DS_Store
+
+# Private pilot feedback and consent belong outside tracked templates.
+pilots/records/
