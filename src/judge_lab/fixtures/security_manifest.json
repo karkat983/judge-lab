@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "created_at_utc": "2026-10-17T00:00:00Z",
+  "dataset_id": "synthetic-security-demo",
+  "dataset_revision": "r1",
+  "label_protocol_revision": "planted-rules-v1",
+  "source": "synthetic-owned-demo",
+  "license_or_permission": "CC0-1.0",
+  "reference_provenance": "Planted synthetic defects; no human or empirical validation claimed.",
+  "evidence_status": "SYNTHETIC",
+  "split_algorithm": "All synthetic examples are development; no held-out evidence.",
+  "split_seed": 44,
+  "sha256": "sha256:386222917fab7c3361ec6258865a707b912083b5c637d99b5eeb2b8fb9f1ba38"
+}

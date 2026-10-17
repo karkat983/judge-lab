@@ -9,7 +9,10 @@ description = "Offline contracts and provenance for security-investigation judge
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
-dependencies = ["pydantic>=2.10,<3"]
+dependencies = ["pydantic>=2.10,<3", "PyYAML>=6,<7"]
+
+[project.scripts]
+judge-lab = "judge_lab.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.6,<1", "mypy>=1.13,<2", "build>=1,<2"]
@@ -21,7 +24,7 @@ include = ["judge_lab", "judge_lab.*"]
 namespaces = false
 
 [tool.setuptools.package-data]
-judge_lab = ["py.typed"]
+judge_lab = ["py.typed", "fixtures/*.json", "fixtures/*.jsonl"]
 
 [tool.mypy]
 python_version = "3.12"

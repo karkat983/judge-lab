@@ -1,8 +1,8 @@
 # judge-lab
 
-> Status: **Phase 01 contracts implemented.** Offline security-investigation schemas,
-> JSONL validation and provenance are available as `judge_lab`. The judge runner,
-> calibration reports and release gates are later phases.
+> Status: **Offline calibration CLI implemented.** Strict contracts, mock/imported
+> predictions, uncertainty metrics and JSON/HTML evidence reports are available.
+> Synthetic demonstrations are not empirical validation or a safety certification.
 
 The current MVP evaluates judges of **security-investigation reports** using separate
 `ACCEPT` / `REJECT` references and `ACCEPT` / `REJECT` / `ABSTAIN` predictions.
@@ -11,7 +11,7 @@ experiment remains under `src.*` and is described below as legacy functionality.
 See the [roadmap](ROADMAP.md), [contract guide](docs/contracts-v1.md), and
 [Phase 01 handoff](worklogs/01-bootstrap-contracts.md).
 
-## Phase 01: install and validate offline
+## Install and validate offline
 
 Use Python 3.12 or newer. Dependency installation needs package-index access;
 the smoke check and tests make no model calls.
@@ -21,6 +21,7 @@ make setup
 make test
 make lint
 make typecheck
+.venv/bin/judge-lab demo --out runs/demo
 .venv/bin/python - <<'PY'
 from pathlib import Path
 from judge_lab.load import load_dataset
@@ -32,8 +33,21 @@ PY
 
 The ten bundled cases and example outcomes are **synthetic code fixtures, not
 empirical judge results or human-adjudicated benchmark evidence**. Nothing in
-Phase 01 makes a release decision. No `judge-lab` CLI is implemented yet.
-The public input format in this phase is JSON/JSONL; legacy CSV is not silently converted.
+The default report makes no release decision. Dataset inputs are JSON/JSONL;
+judge configuration accepts bounded JSON or safe YAML. Legacy CSV is not silently converted.
+
+```bash
+.venv/bin/judge-lab validate --data examples/security_fixture.jsonl \
+  --manifest examples/security_manifest.json --judge examples/mock_judge.json
+.venv/bin/judge-lab calibrate --data examples/security_fixture.jsonl \
+  --manifest examples/security_manifest.json --judge examples/mock_judge.json \
+  --predictions examples/synthetic_results.jsonl --run-manifest examples/synthetic_run.json \
+  --out runs/imported
+```
+
+Outputs contain count/uncertainty evidence and hashed case identifiers, not raw reports.
+Existing output requires `--overwrite` and Judge Lab ownership; unowned directories
+and symlinks reject. Import requires exact case IDs and compatible run provenance.
 
 `requirements-dev.lock` pins the tested development environment. `pyproject.toml`
 declares the minimal runtime dependency and separate dev/legacy extras. The old
