@@ -152,3 +152,14 @@ commits/pushes and removal of confirmed obsolete/generated files. Per-phase appr
 pauses are superseded; human annotations, pilot participation and independent
 review cannot be supplied by authorization alone. Preserve reusable legacy code;
 remove only confirmed redundant/generated material and record cleanup separately.
+
+## Phases 02–05 dispositions
+
+Implemented strict-label offline execution with killable deadlines and hard call
+caps; no retry by default and no paid provider. Unknown costs stop further calls.
+Metrics expose denominators, undefined kappa and Wilson intervals; repeated families
+suppress independent-case intervals. Reports minimize raw content and verify numeric
+aggregates. YAML is bounded with aliases/duplicate keys rejected. Baseline selection
+requires independent adjudication declarations and freezes selected labels/metadata.
+Report documents have a separate 16 MiB bound; single records remain 256 KiB.
+All empirical claims remain conditional on externally authenticated provenance.

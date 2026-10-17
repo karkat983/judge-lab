@@ -32,7 +32,7 @@ PY
 ```
 
 The ten bundled cases and example outcomes are **synthetic code fixtures, not
-empirical judge results or human-adjudicated benchmark evidence**. Nothing in
+empirical judge results or human-adjudicated benchmark evidence**.
 The default report makes no release decision. Dataset inputs are JSON/JSONL;
 judge configuration accepts bounded JSON or safe YAML. Legacy CSV is not silently converted.
 

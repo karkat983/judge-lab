@@ -19,7 +19,7 @@ from judge_lab.contracts import (
     RunManifest,
 )
 from judge_lab.load import MAX_DATASET_BYTES, LoadedDataset, read_bounded, verify_dataset
-from judge_lab.provenance import verify_result, verify_run_manifest
+from judge_lab.provenance import verify_run_manifest
 from judge_lab.serialization import decode_model, digest
 
 
@@ -162,11 +162,19 @@ def run_judge(dataset: LoadedDataset, spec: JudgeSpec, run: RunManifest,
 
 def validate_results(dataset: LoadedDataset, run: RunManifest,
                      results: tuple[JudgeResult, ...]) -> tuple[JudgeResult, ...]:
+    verify_dataset(dataset)
+    verify_run_manifest(run)
+    if (run.dataset_digest != dataset.manifest.sha256
+            or run.dataset_manifest_digest != digest(dataset.manifest)):
+        raise ContractError("INTEGRITY_ERROR")
     indexed = {result.case_id: result for result in results}
     if len(indexed) != len(results) or set(indexed) != {case.case_id for case in dataset.cases}:
         raise ContractError("INVALID_INPUT")
     for case in dataset.cases:
-        verify_result(indexed[case.case_id], case, run, dataset)
+        result = indexed[case.case_id]
+        if (result.case_digest != digest(case) or result.run_id != run.run_id
+                or result.judge_spec_digest != run.judge_spec_digest):
+            raise ContractError("INTEGRITY_ERROR")
     return tuple(indexed[key] for key in sorted(indexed))
 
 

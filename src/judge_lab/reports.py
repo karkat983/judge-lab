@@ -2,6 +2,7 @@
 
 import html
 import json
+from pathlib import Path
 from typing import Annotated, Literal
 
 from pydantic import Field
@@ -19,11 +20,11 @@ from judge_lab.contracts import (
     Split,
     Versioned,
 )
-from judge_lab.load import LoadedDataset
+from judge_lab.load import LoadedDataset, read_bounded
 from judge_lab.metrics import Statistics, binary_statistics, calibrate, slice_statistics
 from judge_lab.provenance import verify_run_manifest
 from judge_lab.runner import validate_results
-from judge_lab.serialization import canonical_bytes, digest
+from judge_lab.serialization import MAX_DOCUMENT_BYTES, canonical_bytes, decode_model, digest
 
 
 class Observation(FrozenModel):
@@ -80,8 +81,15 @@ def build_report(dataset: LoadedDataset, results: tuple[JudgeResult, ...],
             "Digests require trusted expected inputs; they are not authentication signatures.",
         ],
     }
-    from judge_lab.serialization import decode_model
-    return decode_model(CalibrationReport, canonical_bytes({**payload, "report_digest": digest(payload)}))
+    return decode_model(CalibrationReport, canonical_bytes({**payload, "report_digest": digest(payload)}),
+                        max_bytes=MAX_DOCUMENT_BYTES)
+
+
+def read_report(path: Path) -> CalibrationReport:
+    report = decode_model(CalibrationReport, read_bounded(path, MAX_DOCUMENT_BYTES),
+                          max_bytes=MAX_DOCUMENT_BYTES)
+    verify_report(report)
+    return report
 
 
 def verify_report(report: CalibrationReport, expected_digest: str | None = None) -> None:

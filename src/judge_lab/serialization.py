@@ -10,6 +10,7 @@ from pydantic import ValidationError
 from judge_lab.contracts import ContractError, FrozenModel
 
 MAX_RECORD_BYTES = 256 * 1024
+MAX_DOCUMENT_BYTES = 16 * 1024 * 1024
 MAX_DEPTH = 32
 
 
@@ -71,10 +72,10 @@ def digest(value: Any) -> str:
     return "sha256:" + hashlib.sha256(canonical_bytes(value)).hexdigest()
 
 
-def parse_json(raw: bytes | str) -> Any:
+def parse_json(raw: bytes | str, *, max_bytes: int = MAX_RECORD_BYTES) -> Any:
     try:
         data = raw.encode("utf-8") if isinstance(raw, str) else raw
-        if len(data) > MAX_RECORD_BYTES:
+        if len(data) > max_bytes:
             raise ContractError("INPUT_TOO_LARGE")
         value = json.loads(data.decode("utf-8"), object_pairs_hook=_unique_object,
                            parse_constant=_invalid_constant)
@@ -84,11 +85,11 @@ def parse_json(raw: bytes | str) -> Any:
         raise ContractError("INVALID_INPUT") from None
 
 
-def decode_model[T: FrozenModel](model: type[T], raw: bytes | str) -> T:
-    value = parse_json(raw)
+def decode_model[T: FrozenModel](model: type[T], raw: bytes | str,
+                                *, max_bytes: int = MAX_RECORD_BYTES) -> T:
+    value = parse_json(raw, max_bytes=max_bytes)
     try:
         # JSON strict mode accepts JSON arrays for immutable tuples and ISO timestamps.
         return model.model_validate_json(canonical_bytes(value), strict=True)
     except ValidationError:
         raise ContractError("INVALID_INPUT") from None
-
