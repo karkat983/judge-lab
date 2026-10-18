@@ -1,0 +1,10 @@
+{
+  "generation": "Python synthetic templates; integrated Rust engines NOT_RUN",
+  "schema_version": "1.0",
+  "source": "local Lattivant/lattivant-lab",
+  "source_commit": "9b30321ab2001bd29199510043497516c1eb6ec3",
+  "source_sha256": {
+    "crates/lattivant-lab/src/fixtures.rs": "70dc83d37982dc0fbb9a8c3fc8e9b4be4b4d26f9ec9233fe83d6dc2ef37f1e4f",
+    "crates/lattivant-lab/src/groundtruth.rs": "ffeb638f2a8131377e9b3551d6f10a5bfc04223d7be4ea49e9c79d448a7f3007"
+  }
+}
