@@ -1,0 +1,26 @@
+{
+  "directional_rates": {
+    "P2_ACCEPT": {
+      "denominator": 0,
+      "numerator": 0,
+      "status": "NOT_EVALUABLE",
+      "value": null,
+      "wilson_95_nominal": null
+    },
+    "P2_REJECT": {
+      "denominator": 45,
+      "numerator": 0,
+      "status": "EVALUATED",
+      "value": 0.0,
+      "wilson_95_nominal": [
+        0.0,
+        0.07865159873288836
+      ]
+    }
+  },
+  "exploratory_selection": true,
+  "raw_evidence_commit": "f94d8e96b75bc9ebb58232e827fb0646a95d9965",
+  "rule": "higher defined directional rate; defined beats undefined; tie P2_ACCEPT",
+  "schema_version": "1.0",
+  "selected": "P2_REJECT"
+}
