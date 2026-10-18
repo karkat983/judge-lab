@@ -4,7 +4,7 @@
 
 200 English prompts sampled from XSTest (Röttger et al., NAACL 2024; CC BY 4.0), each with the
 XSTest authors' label of whether the request is **safe** (110) or **unsafe** (90) to comply with.
-Stratified by XSTest's 18 categories (11-12 prompts each). See `docs/data.md` for provenance,
+Stratified by XSTest's 18 categories (11-12 prompts each). See `docs/legacy/data.md` for provenance,
 checksums and sampling.
 
 ## Intended use in this repo
@@ -27,7 +27,7 @@ checksums and sampling.
   because the request is benign, not because any particular answer is.
 - Categories are synthetic contrasts designed by the XSTest authors (e.g. homonyms of violent
   words). That makes surface-word errors easy to see, but real prompts are messier.
-- About 7% of reviewed items are genuinely ambiguous (docs/label_review.md); judge errors on
+- About 7% of reviewed items are genuinely ambiguous (docs/legacy/label_review.md); judge errors on
   those are reported separately.
 - Several unsafe prompts describe serious harm (violence, self-harm, abuse). They are kept as
   short text strings only; no harmful completions are generated or stored by this project.

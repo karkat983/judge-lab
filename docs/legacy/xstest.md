@@ -38,7 +38,7 @@ Public data only (XSTest, Röttger et al. 2024, CC BY 4.0). Not affiliated with 
 ## Changelog
 - Day 1: project scaffold and changelog; XSTest sampler, loader, agreement stats.
 - Committed the 200-prompt sample with source, licence and data card; label review of 30 items
-  (28 agree, 2 ambiguous, 0 clear disagreements; docs/label_review.md).
+  (28 agree, 2 ambiguous, 0 clear disagreements; docs/legacy/label_review.md).
 - LLM layer: local Ollama judge by default (qwen2.5:3b-instruct), Claude optional; cache, cost
   meter, retry with backoff, rate limiting, scripted fake LLM for tests.
 - Statistics: Cohen's kappa checked against its definition, bootstrap CI (coverage-tested),

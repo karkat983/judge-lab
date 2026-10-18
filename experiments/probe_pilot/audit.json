@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "calls": 288,
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "primary_counts": {
+    "P1": "16/48",
+    "P2": "0/48",
+    "P2_SANITIZED": "0/48",
+    "P3": "0/48",
+    "P4": "41/48"
+  },
+  "preregistration_unchanged": true
+}

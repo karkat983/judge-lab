@@ -1,13 +1,13 @@
 # judge-lab
 
-> Status: **Local MVP tooling implemented; empirical validation pending.** Calibration, fixed
+> Status: **Local MVP tooling implemented; local model pilot available.** Calibration, fixed
 > probes, baseline/comparison workflows, conservative gates and pilot records are available.
 > Synthetic demonstrations are not empirical validation or a safety certification.
 
 The current MVP evaluates judges of **security-investigation reports** using separate
 `ACCEPT` / `REJECT` references and `ACCEPT` / `REJECT` / `ABSTAIN` predictions.
 Execution failures are typed `ERROR` outcomes. The existing XSTest safe/unsafe
-experiment remains under `src.*` and is described below as legacy functionality.
+experiment remains under `src.*` and is documented under `docs/legacy/`.
 See the [roadmap](ROADMAP.md), [contract guide](docs/contracts-v1.md), and
 [final review](reviews/GO-NO-GO.md).
 
@@ -84,14 +84,20 @@ check consistency, not truth or authenticity; source evidence needs a trusted
 custodian. Output paths assume a private local directory without concurrent writers.
 See [review findings](reviews/INDEPENDENT-REVIEW.md) before using confidential data.
 
-The [legacy XSTest workflow](docs/legacy-xstest.md), its source/tests, sample and
+The [legacy XSTest workflow](docs/legacy/xstest.md), its source/tests, sample and
 attribution are preserved. Legacy safe/unsafe outputs are never silently mapped
 into ACCEPT/REJECT. Generated build/cache clutter can be removed; historical
 source and user-authored plans are retained.
 
-## Curriculum coverage
+## Results
 
-This project primarily addresses **#29, Calibrated LLM-as-Judge Eval Framework**,
-with partial overlap in **#13, #14, #16, #20 and #21**: six relevant problems out
-of 38, one primary. That is scope coverage, not six completed curriculum projects.
-See the [audit mapping](worklogs/00-repo-audit.md#ai-engineer-curriculum-coverage).
+The [preregistered Ollama probe pilot](experiments/probe_pilot/results.md) measures
+`llama3.1:8b` on 48 synthetic security-investigation reports using four fixed
+metamorphic probes and a matched quoted-field sanitizer. Raw model responses,
+model digest, error/abstention counts and nominal Wilson intervals are committed.
+These template-based measurements do not satisfy the independent empirical
+B0/H1/H2 gates or establish production robustness.
+
+The runner is opt-in and local: `.venv/bin/python scripts/probe_pilot.py run`.
+It refuses to overwrite the committed pilot run. See the
+[frozen preregistration](experiments/probe_pilot/PREREG.md) for metrics and budgets.
