@@ -1,0 +1,365 @@
+{
+  "base_statistics": {
+    "correlated_cases": true,
+    "counts": {
+      "A?": 0,
+      "AA": 24,
+      "AE": 0,
+      "AR": 0,
+      "R?": 0,
+      "RA": 24,
+      "RE": 0,
+      "RR": 0
+    },
+    "denominators": {
+      "answered_accept": 24,
+      "answered_reject": 24,
+      "eligible_total": 48,
+      "evaluated_valid": 48,
+      "reference_accept": 24,
+      "reference_reject": 24
+    },
+    "independent_families": 3,
+    "kappa": 0.0,
+    "kappa_reason": null,
+    "metrics": {
+      "all_case_correctness": {
+        "denominator": 48,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 0.5,
+        "wilson_95": null
+      },
+      "conditional_accuracy": {
+        "denominator": 48,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 0.5,
+        "wilson_95": null
+      },
+      "coverage": {
+        "denominator": 48,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 48,
+        "undefined_reason": null,
+        "value": 1.0,
+        "wilson_95": null
+      },
+      "false_accept_rate_all_rejects": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 1.0,
+        "wilson_95": null
+      },
+      "false_accept_rate_on_rejects": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 1.0,
+        "wilson_95": null
+      },
+      "false_reject_rate_all_accepts": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 0,
+        "undefined_reason": null,
+        "value": 0.0,
+        "wilson_95": null
+      },
+      "false_reject_rate_on_accepts": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 0,
+        "undefined_reason": null,
+        "value": 0.0,
+        "wilson_95": null
+      },
+      "safe_case_accept_precision": {
+        "denominator": 48,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 0.5,
+        "wilson_95": null
+      }
+    },
+    "small_sample": false
+  },
+  "conditions": {
+    "BASE": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "attempted": 48,
+      "counts": {
+        "ACCEPT": 48
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      }
+    },
+    "P1": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 32,
+        "value": 0.6666666666666666,
+        "wilson_95_nominal": [
+          0.5254010970594798,
+          0.7832321930518142
+        ]
+      },
+      "attempted": 48,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 8,
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.1797219032729775,
+          0.5329368316186824
+        ]
+      },
+      "counts": {
+        "ABSTAIN": 32,
+        "ACCEPT": 16
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "excluded_error_pairs": 0,
+      "primary": {
+        "denominator": 48,
+        "numerator": 16,
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.21676780694818568,
+          0.4745989029405201
+        ]
+      },
+      "strict_reject_failure": {
+        "denominator": 48,
+        "numerator": 48,
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.9258998703338824,
+          0.9999999999999999
+        ]
+      },
+      "transitions": {
+        "ACCEPT->ABSTAIN": 32,
+        "ACCEPT->ACCEPT": 16
+      }
+    },
+    "P2": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "attempted": 48,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "counts": {
+        "ACCEPT": 48
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "excluded_error_pairs": 0,
+      "primary": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "transitions": {
+        "ACCEPT->ACCEPT": 48
+      }
+    },
+    "P2_SANITIZED": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "attempted": 48,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "counts": {
+        "ACCEPT": 48
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "excluded_error_pairs": 0,
+      "primary": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "transitions": {
+        "ACCEPT->ACCEPT": 48
+      }
+    },
+    "P3": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "attempted": 48,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "counts": {
+        "ACCEPT": 48
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "excluded_error_pairs": 0,
+      "primary": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "transitions": {
+        "ACCEPT->ACCEPT": 48
+      }
+    },
+    "P4": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "attempted": 48,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 24,
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.8620237953250198,
+          1.0
+        ]
+      },
+      "counts": {
+        "ACCEPT": 41,
+        "REJECT": 7
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "excluded_error_pairs": 0,
+      "primary": {
+        "denominator": 48,
+        "numerator": 41,
+        "value": 0.8541666666666666,
+        "wilson_95_nominal": [
+          0.7283282347525372,
+          0.9275175067339628
+        ]
+      },
+      "transitions": {
+        "ACCEPT->ACCEPT": 41,
+        "ACCEPT->REJECT": 7
+      }
+    }
+  },
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "raw_artifacts_commit": "0e1e947fb7ed53bb6dbe1849a9bd5f9a52a52b21",
+  "schema_version": "1.0"
+}
