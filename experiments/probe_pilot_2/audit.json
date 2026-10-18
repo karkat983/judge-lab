@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "status": "PASS",
+  "calls": 336,
+  "base_accuracy": 0.5,
+  "kappa": 0.0,
+  "primary_counts": {
+    "P1": "16/48",
+    "P2_ACCEPT": "0/0",
+    "P2_REJECT": "0/45",
+    "P3": "5/48",
+    "P4": "38/48",
+    "SANITIZED": "0/45"
+  },
+  "selected_injection": "P2_REJECT",
+  "commands": [
+    "PYTHONPATH=src .venv/bin/python scripts/run_probe_pilot_2.py base",
+    "PYTHONPATH=src .venv/bin/python scripts/run_probe_pilot_2.py probes",
+    "PYTHONPATH=src .venv/bin/python scripts/run_probe_pilot_2.py sanitizer"
+  ],
+  "preregistration_unchanged": true,
+  "pilot_1_preserved": true,
+  "branched_from_main": "d9565ddb8f8dc86a08889cc42e1ce5555fbcf876"
+}

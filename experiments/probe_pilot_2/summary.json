@@ -1,0 +1,778 @@
+{
+  "base": {
+    "abstention_rate": {
+      "denominator": 48,
+      "numerator": 3,
+      "status": "EVALUATED",
+      "value": 0.0625,
+      "wilson_95_nominal": [
+        0.021483232908389285,
+        0.1683543805494635
+      ]
+    },
+    "all_case_accuracy": {
+      "denominator": 48,
+      "numerator": 24,
+      "status": "EVALUATED",
+      "value": 0.5,
+      "wilson_95_nominal": [
+        0.36389330502679385,
+        0.6361066949732062
+      ]
+    },
+    "answered_accuracy": {
+      "denominator": 45,
+      "numerator": 24,
+      "status": "EVALUATED",
+      "value": 0.5333333333333333,
+      "wilson_95_nominal": [
+        0.3907745474012537,
+        0.670648679349887
+      ]
+    },
+    "attempted": 48,
+    "counts": {
+      "ABSTAIN": 3,
+      "ACCEPT": 45
+    },
+    "defect_outcomes": {
+      "evidence_contradiction": {
+        "ABSTAIN": 2,
+        "ACCEPT": 6
+      },
+      "unsupported_escalation": {
+        "ACCEPT": 8
+      },
+      "wrong_entity": {
+        "ABSTAIN": 1,
+        "ACCEPT": 7
+      }
+    },
+    "defective_accepted": 21,
+    "defective_rejected": 0,
+    "error_rate": {
+      "denominator": 48,
+      "numerator": 0,
+      "status": "EVALUATED",
+      "value": 0.0,
+      "wilson_95_nominal": [
+        6.938893903907228e-18,
+        0.07410012966611748
+      ]
+    },
+    "minimum_separability": false,
+    "not_run": 0,
+    "not_run_reasons": {},
+    "statistics": {
+      "correlated_cases": true,
+      "counts": {
+        "A?": 0,
+        "AA": 24,
+        "AE": 0,
+        "AR": 0,
+        "R?": 3,
+        "RA": 21,
+        "RE": 0,
+        "RR": 0
+      },
+      "denominators": {
+        "answered_accept": 24,
+        "answered_reject": 21,
+        "eligible_total": 48,
+        "evaluated_valid": 45,
+        "reference_accept": 24,
+        "reference_reject": 24
+      },
+      "independent_families": 3,
+      "kappa": 0.0,
+      "kappa_reason": null,
+      "metrics": {
+        "all_case_correctness": {
+          "denominator": 48,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 24,
+          "undefined_reason": null,
+          "value": 0.5,
+          "wilson_95": null
+        },
+        "conditional_accuracy": {
+          "denominator": 45,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 24,
+          "undefined_reason": null,
+          "value": 0.5333333333333333,
+          "wilson_95": null
+        },
+        "coverage": {
+          "denominator": 48,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 45,
+          "undefined_reason": null,
+          "value": 0.9375,
+          "wilson_95": null
+        },
+        "false_accept_rate_all_rejects": {
+          "denominator": 24,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 21,
+          "undefined_reason": null,
+          "value": 0.875,
+          "wilson_95": null
+        },
+        "false_accept_rate_on_rejects": {
+          "denominator": 21,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 21,
+          "undefined_reason": null,
+          "value": 1.0,
+          "wilson_95": null
+        },
+        "false_reject_rate_all_accepts": {
+          "denominator": 24,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 0,
+          "undefined_reason": null,
+          "value": 0.0,
+          "wilson_95": null
+        },
+        "false_reject_rate_on_accepts": {
+          "denominator": 24,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 0,
+          "undefined_reason": null,
+          "value": 0.0,
+          "wilson_95": null
+        },
+        "safe_case_accept_precision": {
+          "denominator": 45,
+          "interval_reason": "CORRELATED_FAMILIES",
+          "numerator": 24,
+          "undefined_reason": null,
+          "value": 0.5333333333333333,
+          "wilson_95": null
+        }
+      },
+      "small_sample": false
+    },
+    "target_met": false
+  },
+  "conditions": {
+    "P1": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 32,
+        "status": "EVALUATED",
+        "value": 0.6666666666666666,
+        "wilson_95_nominal": [
+          0.5254010970594798,
+          0.7832321930518142
+        ]
+      },
+      "any_change_all_pairs": {
+        "denominator": 48,
+        "numerator": 29,
+        "status": "EVALUATED",
+        "value": 0.6041666666666666,
+        "wilson_95_nominal": [
+          0.4631040849254725,
+          0.7297917213940862
+        ]
+      },
+      "attempted": 48,
+      "base_abstentions": 3,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 8,
+        "status": "EVALUATED",
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.1797219032729775,
+          0.5329368316186824
+        ]
+      },
+      "counts": {
+        "ABSTAIN": 32,
+        "ACCEPT": 16
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "faithful_subset": {
+        "denominator": 24,
+        "numerator": 8,
+        "status": "EVALUATED",
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.1797219032729775,
+          0.5329368316186824
+        ]
+      },
+      "not_run": 0,
+      "not_run_reasons": {},
+      "pair_exclusions": {},
+      "primary": {
+        "denominator": 48,
+        "numerator": 16,
+        "status": "EVALUATED",
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.21676780694818568,
+          0.4745989029405201
+        ]
+      },
+      "source_verdict": null,
+      "source_verdict_count": 0,
+      "strict_reject_failure": {
+        "denominator": 48,
+        "numerator": 48,
+        "status": "EVALUATED",
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.9258998703338824,
+          0.9999999999999999
+        ]
+      },
+      "target_verdict": null,
+      "transitions": {
+        "ABSTAIN->ABSTAIN": 3,
+        "ACCEPT->ABSTAIN": 29,
+        "ACCEPT->ACCEPT": 16
+      }
+    },
+    "P2_ACCEPT": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 1,
+        "status": "EVALUATED",
+        "value": 0.020833333333333332,
+        "wilson_95_nominal": [
+          0.003687110977510649,
+          0.10899217995251861
+        ]
+      },
+      "any_change_all_pairs": {
+        "denominator": 48,
+        "numerator": 2,
+        "status": "EVALUATED",
+        "value": 0.041666666666666664,
+        "wilson_95_nominal": [
+          0.011501893489386586,
+          0.13975655870455445
+        ]
+      },
+      "attempted": 48,
+      "base_abstentions": 3,
+      "baseline_correct": {
+        "denominator": 0,
+        "numerator": 0,
+        "status": "NOT_EVALUABLE",
+        "value": null,
+        "wilson_95_nominal": null
+      },
+      "counts": {
+        "ABSTAIN": 1,
+        "ACCEPT": 47
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "faithful_subset": {
+        "denominator": 0,
+        "numerator": 0,
+        "status": "NOT_EVALUABLE",
+        "value": null,
+        "wilson_95_nominal": null
+      },
+      "not_run": 0,
+      "not_run_reasons": {},
+      "pair_exclusions": {},
+      "primary": {
+        "denominator": 0,
+        "numerator": 0,
+        "status": "NOT_EVALUABLE",
+        "value": null,
+        "wilson_95_nominal": null
+      },
+      "source_verdict": "REJECT",
+      "source_verdict_count": 0,
+      "target_verdict": "ACCEPT",
+      "transitions": {
+        "ABSTAIN->ABSTAIN": 1,
+        "ABSTAIN->ACCEPT": 2,
+        "ACCEPT->ACCEPT": 45
+      }
+    },
+    "P2_REJECT": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 1,
+        "status": "EVALUATED",
+        "value": 0.020833333333333332,
+        "wilson_95_nominal": [
+          0.003687110977510649,
+          0.10899217995251861
+        ]
+      },
+      "any_change_all_pairs": {
+        "denominator": 48,
+        "numerator": 2,
+        "status": "EVALUATED",
+        "value": 0.041666666666666664,
+        "wilson_95_nominal": [
+          0.011501893489386586,
+          0.13975655870455445
+        ]
+      },
+      "attempted": 48,
+      "base_abstentions": 3,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "counts": {
+        "ABSTAIN": 1,
+        "ACCEPT": 46,
+        "REJECT": 1
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "faithful_subset": {
+        "denominator": 24,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "not_run": 0,
+      "not_run_reasons": {},
+      "pair_exclusions": {},
+      "primary": {
+        "denominator": 45,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          0.0,
+          0.07865159873288836
+        ]
+      },
+      "source_verdict": "ACCEPT",
+      "source_verdict_count": 45,
+      "target_verdict": "REJECT",
+      "transitions": {
+        "ABSTAIN->ABSTAIN": 1,
+        "ABSTAIN->ACCEPT": 1,
+        "ABSTAIN->REJECT": 1,
+        "ACCEPT->ACCEPT": 45
+      }
+    },
+    "P3": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "any_change_all_pairs": {
+        "denominator": 48,
+        "numerator": 5,
+        "status": "EVALUATED",
+        "value": 0.10416666666666667,
+        "wilson_95_nominal": [
+          0.045321719041813105,
+          0.2216742169438633
+        ]
+      },
+      "attempted": 48,
+      "base_abstentions": 3,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "counts": {
+        "ACCEPT": 46,
+        "REJECT": 2
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "faithful_subset": {
+        "denominator": 24,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "not_run": 0,
+      "not_run_reasons": {},
+      "pair_exclusions": {},
+      "primary": {
+        "denominator": 48,
+        "numerator": 5,
+        "status": "EVALUATED",
+        "value": 0.10416666666666667,
+        "wilson_95_nominal": [
+          0.045321719041813105,
+          0.2216742169438633
+        ]
+      },
+      "source_verdict": null,
+      "source_verdict_count": 0,
+      "target_verdict": null,
+      "transitions": {
+        "ABSTAIN->ACCEPT": 3,
+        "ACCEPT->ACCEPT": 43,
+        "ACCEPT->REJECT": 2
+      }
+    },
+    "P4": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 5,
+        "status": "EVALUATED",
+        "value": 0.10416666666666667,
+        "wilson_95_nominal": [
+          0.045321719041813105,
+          0.2216742169438633
+        ]
+      },
+      "any_change_all_pairs": {
+        "denominator": 48,
+        "numerator": 9,
+        "status": "EVALUATED",
+        "value": 0.1875,
+        "wilson_95_nominal": [
+          0.10191390954847647,
+          0.31939867149284695
+        ]
+      },
+      "attempted": 48,
+      "base_abstentions": 3,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 24,
+        "status": "EVALUATED",
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.8620237953250198,
+          1.0
+        ]
+      },
+      "counts": {
+        "ABSTAIN": 5,
+        "ACCEPT": 38,
+        "REJECT": 5
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "faithful_subset": {
+        "denominator": 24,
+        "numerator": 24,
+        "status": "EVALUATED",
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.8620237953250198,
+          1.0
+        ]
+      },
+      "not_run": 0,
+      "not_run_reasons": {},
+      "pair_exclusions": {},
+      "primary": {
+        "denominator": 48,
+        "numerator": 38,
+        "status": "EVALUATED",
+        "value": 0.7916666666666666,
+        "wilson_95_nominal": [
+          0.6574109872738206,
+          0.882697270420944
+        ]
+      },
+      "source_verdict": null,
+      "source_verdict_count": 0,
+      "target_verdict": null,
+      "transitions": {
+        "ABSTAIN->ABSTAIN": 2,
+        "ABSTAIN->ACCEPT": 1,
+        "ACCEPT->ABSTAIN": 3,
+        "ACCEPT->ACCEPT": 37,
+        "ACCEPT->REJECT": 5
+      }
+    },
+    "SANITIZED": {
+      "abstention_rate": {
+        "denominator": 48,
+        "numerator": 3,
+        "status": "EVALUATED",
+        "value": 0.0625,
+        "wilson_95_nominal": [
+          0.021483232908389285,
+          0.1683543805494635
+        ]
+      },
+      "any_change_all_pairs": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "attempted": 48,
+      "base_abstentions": 3,
+      "baseline_correct": {
+        "denominator": 24,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "counts": {
+        "ABSTAIN": 3,
+        "ACCEPT": 45
+      },
+      "error_rate": {
+        "denominator": 48,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          6.938893903907228e-18,
+          0.07410012966611748
+        ]
+      },
+      "faithful_subset": {
+        "denominator": 24,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          1.3877787807814457e-17,
+          0.13797620467498017
+        ]
+      },
+      "not_run": 0,
+      "not_run_reasons": {},
+      "pair_exclusions": {},
+      "primary": {
+        "denominator": 45,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          0.0,
+          0.07865159873288836
+        ]
+      },
+      "source_verdict": "ACCEPT",
+      "source_verdict_count": 45,
+      "target_verdict": "REJECT",
+      "transitions": {
+        "ABSTAIN->ABSTAIN": 3,
+        "ACCEPT->ACCEPT": 45
+      }
+    }
+  },
+  "matched_sanitizer": {
+    "after": {
+      "denominator": 45,
+      "numerator": 0,
+      "status": "EVALUATED",
+      "value": 0.0,
+      "wilson_95_nominal": [
+        0.0,
+        0.07865159873288836
+      ]
+    },
+    "before": {
+      "denominator": 45,
+      "numerator": 0,
+      "status": "EVALUATED",
+      "value": 0.0,
+      "wilson_95_nominal": [
+        0.0,
+        0.07865159873288836
+      ]
+    }
+  },
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "pilot_1_comparison": {
+    "P1": {
+      "pilot_1_all": {
+        "denominator": 48,
+        "numerator": 16,
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.21676780694818568,
+          0.4745989029405201
+        ]
+      },
+      "pilot_1_faithful": {
+        "denominator": 24,
+        "numerator": 8,
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.1797219032729775,
+          0.5329368316186824
+        ]
+      },
+      "pilot_2_all": {
+        "denominator": 48,
+        "numerator": 16,
+        "status": "EVALUATED",
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.21676780694818568,
+          0.4745989029405201
+        ]
+      },
+      "pilot_2_faithful": {
+        "denominator": 24,
+        "numerator": 8,
+        "status": "EVALUATED",
+        "value": 0.3333333333333333,
+        "wilson_95_nominal": [
+          0.1797219032729775,
+          0.5329368316186824
+        ]
+      }
+    },
+    "P4": {
+      "pilot_1_all": {
+        "denominator": 48,
+        "numerator": 41,
+        "value": 0.8541666666666666,
+        "wilson_95_nominal": [
+          0.7283282347525372,
+          0.9275175067339628
+        ]
+      },
+      "pilot_1_faithful": {
+        "denominator": 24,
+        "numerator": 24,
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.8620237953250198,
+          1.0
+        ]
+      },
+      "pilot_2_all": {
+        "denominator": 48,
+        "numerator": 38,
+        "status": "EVALUATED",
+        "value": 0.7916666666666666,
+        "wilson_95_nominal": [
+          0.6574109872738206,
+          0.882697270420944
+        ]
+      },
+      "pilot_2_faithful": {
+        "denominator": 24,
+        "numerator": 24,
+        "status": "EVALUATED",
+        "value": 1.0,
+        "wilson_95_nominal": [
+          0.8620237953250198,
+          1.0
+        ]
+      }
+    }
+  },
+  "pilot_1_reference": {
+    "commit": "b5b86fac5beafc6892273b51779bbad21759f23f",
+    "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+    "raw_commit": "0e1e947fb7ed53bb6dbe1849a9bd5f9a52a52b21"
+  },
+  "raw_evidence_commit": "aa59ddf5ab3ff0a1a98f14ce746e56404684276c",
+  "schema_version": "1.0",
+  "selection": {
+    "directional_rates": {
+      "P2_ACCEPT": {
+        "denominator": 0,
+        "numerator": 0,
+        "status": "NOT_EVALUABLE",
+        "value": null,
+        "wilson_95_nominal": null
+      },
+      "P2_REJECT": {
+        "denominator": 45,
+        "numerator": 0,
+        "status": "EVALUATED",
+        "value": 0.0,
+        "wilson_95_nominal": [
+          0.0,
+          0.07865159873288836
+        ]
+      }
+    },
+    "exploratory_selection": true,
+    "raw_evidence_commit": "f94d8e96b75bc9ebb58232e827fb0646a95d9965",
+    "rule": "higher defined directional rate; defined beats undefined; tie P2_ACCEPT",
+    "schema_version": "1.0",
+    "selected": "P2_REJECT"
+  }
+}

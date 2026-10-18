@@ -95,3 +95,13 @@ This project primarily addresses **#29, Calibrated LLM-as-Judge Eval Framework**
 with partial overlap in **#13, #14, #16, #20 and #21**: six relevant problems out
 of 38, one primary. That is scope coverage, not six completed curriculum projects.
 See the [audit mapping](worklogs/00-repo-audit.md#ai-engineer-curriculum-coverage).
+
+## Probe pilot 2
+
+The [stronger-defect and bidirectional-injection pilot](experiments/probe_pilot_2/results.md)
+uses the same local `llama3.1:8b` judge as pilot 1, preserves 24 faithful inputs, and
+strengthens 24 defective reports. See the [preregistration](experiments/probe_pilot_2/PREREG.md)
+and [base separability check](experiments/probe_pilot_2/base_check.md). Per-call responses,
+model digest, commands, error/abstention counts, and nominal Wilson intervals are recorded.
+Pilot 1 remains preserved on branch `probe-pilot` at `b5b86fa`. These synthetic local
+measurements do not satisfy independent human-validation or production-release gates.
