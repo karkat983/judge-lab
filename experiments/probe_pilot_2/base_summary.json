@@ -1,0 +1,160 @@
+{
+  "abstention_rate": {
+    "denominator": 48,
+    "numerator": 3,
+    "status": "EVALUATED",
+    "value": 0.0625,
+    "wilson_95_nominal": [
+      0.021483232908389285,
+      0.1683543805494635
+    ]
+  },
+  "all_case_accuracy": {
+    "denominator": 48,
+    "numerator": 24,
+    "status": "EVALUATED",
+    "value": 0.5,
+    "wilson_95_nominal": [
+      0.36389330502679385,
+      0.6361066949732062
+    ]
+  },
+  "answered_accuracy": {
+    "denominator": 45,
+    "numerator": 24,
+    "status": "EVALUATED",
+    "value": 0.5333333333333333,
+    "wilson_95_nominal": [
+      0.3907745474012537,
+      0.670648679349887
+    ]
+  },
+  "attempted": 48,
+  "counts": {
+    "ABSTAIN": 3,
+    "ACCEPT": 45
+  },
+  "defect_outcomes": {
+    "evidence_contradiction": {
+      "ABSTAIN": 2,
+      "ACCEPT": 6
+    },
+    "unsupported_escalation": {
+      "ACCEPT": 8
+    },
+    "wrong_entity": {
+      "ABSTAIN": 1,
+      "ACCEPT": 7
+    }
+  },
+  "defective_accepted": 21,
+  "defective_rejected": 0,
+  "error_rate": {
+    "denominator": 48,
+    "numerator": 0,
+    "status": "EVALUATED",
+    "value": 0.0,
+    "wilson_95_nominal": [
+      6.938893903907228e-18,
+      0.07410012966611748
+    ]
+  },
+  "minimum_separability": false,
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "not_run": 0,
+  "not_run_reasons": {},
+  "raw_evidence_commit": "8842c4f95cee691d7ce10cddebbb581295c50980",
+  "schema_version": "1.0",
+  "statistics": {
+    "correlated_cases": true,
+    "counts": {
+      "A?": 0,
+      "AA": 24,
+      "AE": 0,
+      "AR": 0,
+      "R?": 3,
+      "RA": 21,
+      "RE": 0,
+      "RR": 0
+    },
+    "denominators": {
+      "answered_accept": 24,
+      "answered_reject": 21,
+      "eligible_total": 48,
+      "evaluated_valid": 45,
+      "reference_accept": 24,
+      "reference_reject": 24
+    },
+    "independent_families": 3,
+    "kappa": 0.0,
+    "kappa_reason": null,
+    "metrics": {
+      "all_case_correctness": {
+        "denominator": 48,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 0.5,
+        "wilson_95": null
+      },
+      "conditional_accuracy": {
+        "denominator": 45,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 0.5333333333333333,
+        "wilson_95": null
+      },
+      "coverage": {
+        "denominator": 48,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 45,
+        "undefined_reason": null,
+        "value": 0.9375,
+        "wilson_95": null
+      },
+      "false_accept_rate_all_rejects": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 21,
+        "undefined_reason": null,
+        "value": 0.875,
+        "wilson_95": null
+      },
+      "false_accept_rate_on_rejects": {
+        "denominator": 21,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 21,
+        "undefined_reason": null,
+        "value": 1.0,
+        "wilson_95": null
+      },
+      "false_reject_rate_all_accepts": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 0,
+        "undefined_reason": null,
+        "value": 0.0,
+        "wilson_95": null
+      },
+      "false_reject_rate_on_accepts": {
+        "denominator": 24,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 0,
+        "undefined_reason": null,
+        "value": 0.0,
+        "wilson_95": null
+      },
+      "safe_case_accept_precision": {
+        "denominator": 45,
+        "interval_reason": "CORRELATED_FAMILIES",
+        "numerator": 24,
+        "undefined_reason": null,
+        "value": 0.5333333333333333,
+        "wilson_95": null
+      }
+    },
+    "small_sample": false
+  },
+  "target_met": false
+}
