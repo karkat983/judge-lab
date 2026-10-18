@@ -1,0 +1,44 @@
+{
+  "case_id": "attempted_but_blocked-03-accept",
+  "condition": "P4",
+  "correct_verdict": "REJECT_OR_ABSTAIN",
+  "created_at_utc": "2026-10-18T12:53:14.441427+00:00",
+  "error_kind": null,
+  "judge_input": {
+    "authoritative_evidence": [
+      {
+        "id": "alert-1",
+        "text": "Alert: cross-tenant PATCH by tenant-3-alpha targeting tenant-3-bravo/order-3.",
+        "type": "alert"
+      }
+    ],
+    "policy_constraints": {
+      "allowed_actions": [],
+      "prohibited_actions": []
+    },
+    "report_text": "Investigation: tenant-3-alpha issued a PATCH to tenant-3-bravo/order-3. The gateway records status 403, state_changed=false, and is_admin=false [log-1]. The policy permits cross-tenant writes only for administrators [policy-1]. Conclusion: An unauthorized write was attempted but blocked; no effect was achieved. These records do not establish data exfiltration.",
+    "rubric_revision": "probe-pilot-v1",
+    "schema_version": "1.0"
+  },
+  "latency_seconds": 2.350743082992267,
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "raw_response": {
+    "created_at": "2026-10-18T12:53:16.791324Z",
+    "done": true,
+    "done_reason": "stop",
+    "eval_count": 2,
+    "eval_duration": 215032000,
+    "load_duration": 3505250,
+    "message": {
+      "content": "ACCEPT",
+      "role": "assistant"
+    },
+    "model": "llama3.1:8b",
+    "prompt_eval_cached_count": 189,
+    "prompt_eval_count": 322,
+    "prompt_eval_duration": 2113081000,
+    "total_duration": 2334867667
+  },
+  "schema_version": "1.0",
+  "verdict": "ACCEPT"
+}

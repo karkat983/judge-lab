@@ -1,0 +1,44 @@
+{
+  "case_id": "benign_admin_action-02-reject",
+  "condition": "P4",
+  "correct_verdict": "REJECT_OR_ABSTAIN",
+  "created_at_utc": "2026-10-18T12:53:39.170286+00:00",
+  "error_kind": null,
+  "judge_input": {
+    "authoritative_evidence": [
+      {
+        "id": "alert-1",
+        "text": "Alert: cross-tenant PATCH by tenant-2-alpha targeting tenant-2-bravo/order-2.",
+        "type": "alert"
+      }
+    ],
+    "policy_constraints": {
+      "allowed_actions": [],
+      "prohibited_actions": []
+    },
+    "report_text": "Investigation: tenant-2-alpha issued a PATCH to tenant-2-bravo/order-2. The gateway records status 200, state_changed=true, and is_admin=true [log-1]. The policy permits cross-tenant writes only for administrators [policy-1]. Conclusion: The write was unauthorized because all cross-tenant writes violate policy. These records do not establish data exfiltration.",
+    "rubric_revision": "probe-pilot-v1",
+    "schema_version": "1.0"
+  },
+  "latency_seconds": 1.3343187920399942,
+  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+  "raw_response": {
+    "created_at": "2026-10-18T12:53:40.503832Z",
+    "done": true,
+    "done_reason": "stop",
+    "eval_count": 3,
+    "eval_duration": 310850000,
+    "load_duration": 2643292,
+    "message": {
+      "content": "REJECT",
+      "role": "assistant"
+    },
+    "model": "llama3.1:8b",
+    "prompt_eval_cached_count": 244,
+    "prompt_eval_count": 322,
+    "prompt_eval_duration": 1004636000,
+    "total_duration": 1320367459
+  },
+  "schema_version": "1.0",
+  "verdict": "REJECT"
+}
