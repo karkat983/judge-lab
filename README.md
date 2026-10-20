@@ -1,13 +1,19 @@
 # judge-lab
 
-> Status: **Local MVP tooling implemented; empirical validation pending.** Calibration, fixed
-> probes, baseline/comparison workflows, conservative gates and pilot records are available.
-> Synthetic demonstrations are not empirical validation or a safety certification.
+## Status: complete (October 2026)
+Results of record: `experiments/probe_pilot/results.md` (pilot 1) and `experiments/probe_pilot_2/results.md` (pilot 2), branch `probe-pilot-2` (pilot 1 also preserved on `probe-pilot`)
+What was measured: two pre-registered pilots of metamorphic and prompt-injection probes against a local `llama3.1:8b` judge on 48 synthetic incident reports.
+Known limitations:
+- One 8B judge, three synthetic templates (24 paired instances); Wilson intervals are nominal because reports are correlated.
+- The judge did not separate faithful from defective reports: pilot 2 accepted 21/24 defective reports, rejected 0/24, κ = 0.
+- The pilot-2 injection probe P2_ACCEPT is NOT_EVALUABLE (no base-REJECT pairs); P2_REJECT flipped 0/45.
+- No independent human adjudication.
+Next step (not done): repeat the probes with a judge that passes the base separability check, on independently labelled reports.
 
 The current MVP evaluates judges of **security-investigation reports** using separate
 `ACCEPT` / `REJECT` references and `ACCEPT` / `REJECT` / `ABSTAIN` predictions.
 Execution failures are typed `ERROR` outcomes. The existing XSTest safe/unsafe
-experiment remains under `src.*` and is described below as legacy functionality.
+experiment remains under `src.*` and is documented under `docs/legacy/`.
 See the [roadmap](ROADMAP.md), [contract guide](docs/contracts-v1.md), and
 [final review](reviews/GO-NO-GO.md).
 
@@ -74,7 +80,7 @@ for statuses, reviewed evidence and approval records; no production bypass exist
   `python -m judge_lab.baseline --help`; requires authorized independent labels.
 - [Matched-resource comparison](experiments/DIFFERENTIATION-PROTOCOL.md):
   `python -m judge_lab.experiments --help`; zero/negative results are valid.
-- [Pilot toolkit](pilots/README.md): five blank records; **zero real pilots**.
+- [Pilot toolkit](pilots/README.md): five blank records for user sessions; **zero real user sessions** (separate from the two model pilots under Results).
 - [Competitor capability review](experiments/COMPETITOR-MATRIX.md): primary-source
   documentation, not a comparative benchmark or superiority claim.
 
@@ -84,24 +90,32 @@ check consistency, not truth or authenticity; source evidence needs a trusted
 custodian. Output paths assume a private local directory without concurrent writers.
 See [review findings](reviews/INDEPENDENT-REVIEW.md) before using confidential data.
 
-The [legacy XSTest workflow](docs/legacy-xstest.md), its source/tests, sample and
+The [legacy XSTest workflow](docs/legacy/xstest.md), its source/tests, sample and
 attribution are preserved. Legacy safe/unsafe outputs are never silently mapped
 into ACCEPT/REJECT. Generated build/cache clutter can be removed; historical
 source and user-authored plans are retained.
 
-## Curriculum coverage
+## Results
 
-This project primarily addresses **#29, Calibrated LLM-as-Judge Eval Framework**,
-with partial overlap in **#13, #14, #16, #20 and #21**: six relevant problems out
-of 38, one primary. That is scope coverage, not six completed curriculum projects.
-See the [audit mapping](worklogs/00-repo-audit.md#ai-engineer-curriculum-coverage).
+### Probe pilot 1
 
-## Probe pilot 2
+The [preregistered Ollama probe pilot](experiments/probe_pilot/results.md) measures
+`llama3.1:8b` on 48 synthetic security-investigation reports using four fixed
+metamorphic probes and a matched quoted-field sanitizer. Raw model responses,
+model digest, error/abstention counts and nominal Wilson intervals are committed.
+These template-based measurements do not satisfy the independent empirical
+B0/H1/H2 gates or establish production robustness.
+
+The runner is opt-in and local: `.venv/bin/python scripts/probe_pilot.py run`.
+It refuses to overwrite the committed pilot run. See the
+[frozen preregistration](experiments/probe_pilot/PREREG.md) for metrics and budgets.
+
+### Probe pilot 2
 
 The [stronger-defect and bidirectional-injection pilot](experiments/probe_pilot_2/results.md)
 uses the same local `llama3.1:8b` judge as pilot 1, preserves 24 faithful inputs, and
 strengthens 24 defective reports. See the [preregistration](experiments/probe_pilot_2/PREREG.md)
 and [base separability check](experiments/probe_pilot_2/base_check.md). Per-call responses,
 model digest, commands, error/abstention counts, and nominal Wilson intervals are recorded.
-Pilot 1 remains preserved on branch `probe-pilot` at `b5b86fa`. These synthetic local
+Pilot 1 is also preserved unchanged on branch `probe-pilot` at `b5b86fa`. These synthetic local
 measurements do not satisfy independent human-validation or production-release gates.
